@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="theme-color" content="#07070C">
+<title>국어 강사 연간 커리큘럼 v0.3</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07070C;
+    --bg-grid: #0D0D15;
+    --panel: #101019;
+    --panel-2: #16162A;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.22);
+    --text: #E5E5F0;
+    --text-dim: #8B8BA6;
+    --text-faint: #4A4A5C;
+
+    --mega: #FF2D95;
+    --mega-glow: rgba(255, 45, 149, 0.4);
+    --kd: #00E5FF;
+    --kd-glow: rgba(0, 229, 255, 0.4);
+    --sd: #B5FF1E;
+    --sd-glow: rgba(181, 255, 30, 0.4);
+    --orb: #FF6B35;
+    --orb-glow: rgba(255, 107, 53, 0.4);
+
+    --p-intro: #A855F7;
+    --p-core:  #EC4899;
+    --p-ebs:   #F59E0B;
+    --p-adv:   #EF4444;
+    --p-final: #10B981;
+    --p-sub:   #6366F1;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    background-image:
+      linear-gradient(var(--bg-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+    color: var(--text);
+    font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'tnum', 'ss03';
+    letter-spacing: -0.01em;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 48px 32px 80px; }
+
+  .hero { margin-bottom: 56px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    color: var(--text-dim); text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--mega); box-shadow: 0 0 8px var(--mega-glow);
+  }
+  .hero h1 {
+    font-size: 52px; font-weight: 800; line-height: 1.05;
+    margin: 0 0 16px; letter-spacing: -0.04em;
+  }
+  .hero h1 span { color: var(--mega); text-shadow: 0 0 24px var(--mega-glow); }
+  .hero-sub { color: var(--text-dim); font-size: 15px; max-width: 620px; line-height: 1.6; margin: 0; }
+  .hero-meta {
+    display: flex; gap: 24px; margin-top: 28px;
+    font-size: 12px; color: var(--text-faint);
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    flex-wrap: wrap;
+  }
+  .hero-meta span b { color: var(--text-dim); font-weight: 500; }
+
+  .filter-bar {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 32px; padding: 12px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+  }
+  .filter-btn {
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    padding: 8px 16px; border-radius: 2px;
+    background: transparent; color: var(--text-dim);
+    border: 1px solid transparent; cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .filter-btn::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: currentColor; opacity: 0.5;
+  }
+  .filter-btn:hover { color: var(--text); background: var(--panel-2); }
+  .filter-btn.active { color: var(--text); background: var(--panel-2); border-color: var(--border-hover); }
+  .filter-btn.mega.active { color: var(--mega); border-color: var(--mega); box-shadow: 0 0 12px var(--mega-glow); }
+  .filter-btn.kd.active   { color: var(--kd);   border-color: var(--kd);   box-shadow: 0 0 12px var(--kd-glow); }
+  .filter-btn.sd.active   { color: var(--sd);   border-color: var(--sd);   box-shadow: 0 0 12px var(--sd-glow); }
+  .filter-btn.orb.active  { color: var(--orb);  border-color: var(--orb);  box-shadow: 0 0 12px var(--orb-glow); }
+  .filter-btn.active::before { opacity: 1; box-shadow: 0 0 6px currentColor; }
+
+  .section-label {
+    display: flex; align-items: baseline; gap: 16px; margin: 56px 0 20px;
+  }
+  .section-label h2 {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.3em;
+    text-transform: uppercase; margin: 0; color: var(--text);
+  }
+  .section-label .idx { font-family: ui-monospace, monospace; font-size: 11px; color: var(--text-faint); }
+  .section-label .rule { flex: 1; height: 1px; background: var(--border); }
+  .section-label .desc { font-size: 12px; color: var(--text-dim); }
+
+  .matrix { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .matrix table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .matrix th, .matrix td {
+    padding: 14px 12px; text-align: left; vertical-align: top;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  .matrix th:last-child, .matrix td:last-child { border-right: none; }
+  .matrix tr:last-child td { border-bottom: none; }
+  .matrix thead th {
+    background: var(--panel-2);
+    font-size: 10.5px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-dim); padding: 10px 12px;
+  }
+  .matrix thead th .pdot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    margin-right: 8px; vertical-align: middle;
+  }
+  .p-intro { background: var(--p-intro); box-shadow: 0 0 6px var(--p-intro); }
+  .p-core  { background: var(--p-core);  box-shadow: 0 0 6px var(--p-core); }
+  .p-ebs   { background: var(--p-ebs);   box-shadow: 0 0 6px var(--p-ebs); }
+  .p-adv   { background: var(--p-adv);   box-shadow: 0 0 6px var(--p-adv); }
+  .p-final { background: var(--p-final); box-shadow: 0 0 6px var(--p-final); }
+  .p-sub   { background: var(--p-sub);   box-shadow: 0 0 6px var(--p-sub); }
+
+  .matrix tr[data-acad] { transition: background 0.3s; }
+  .matrix tr.highlight {
+    background: rgba(255, 255, 255, 0.03);
+    animation: flash 1.2s ease-out;
+  }
+  @keyframes flash {
+    0%   { background: rgba(255, 255, 255, 0.12); }
+    100% { background: rgba(255, 255, 255, 0.03); }
+  }
+
+  .tname { width: 160px; position: relative; }
+  .tname-inner { padding-left: 14px; border-left: 2px solid var(--border); }
+  .tname.mega .tname-inner { border-color: var(--mega); box-shadow: -4px 0 12px -4px var(--mega-glow); }
+  .tname.kd   .tname-inner { border-color: var(--kd);   box-shadow: -4px 0 12px -4px var(--kd-glow); }
+  .tname.sd   .tname-inner { border-color: var(--sd);   box-shadow: -4px 0 12px -4px var(--sd-glow); }
+  .tname h3 { font-size: 18px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.02em; }
+  .tname .acad {
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-faint); font-family: ui-monospace, monospace;
+  }
+  .tname.mega .acad { color: var(--mega); }
+  .tname.kd   .acad { color: var(--kd); }
+  .tname.sd   .acad { color: var(--sd); }
+
+  .cell-item { display: block; padding: 4px 0; color: var(--text); font-size: 12.5px; line-height: 1.5; }
+  .cell-item + .cell-item {
+    margin-top: 2px; padding-top: 6px;
+    border-top: 1px dashed rgba(255,255,255,0.04);
+  }
+  .cell-item .tag {
+    display: inline-block; font-family: ui-monospace, monospace;
+    font-size: 9.5px; padding: 1px 5px; margin-left: 6px;
+    border-radius: 2px; color: var(--text-faint);
+    border: 1px solid var(--border); vertical-align: middle; letter-spacing: 0.05em;
+  }
+  .cell-item small { display:block; color: var(--text-dim); font-size: 11px; margin-top: 2px; }
+  .cell-empty { color: var(--text-faint); font-size: 16px; }
+  tr[data-acad].hidden { display: none; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 16px 28px;
+    margin: 0 0 16px; padding: 12px 16px;
+    font-size: 11px; color: var(--text-dim);
+    border: 1px solid var(--border); border-radius: 4px;
+    background: var(--panel);
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-item .pdot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* TIMELINE */
+  .timeline {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 4px; padding: 20px 0 16px; overflow: hidden;
+  }
+  .tl-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    column-gap: 16px;
+  }
+  .tl-head-name, .tl-head-track {
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .tl-head-name {
+    padding-left: 20px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--text-faint);
+    align-self: end;
+  }
+  .tl-head-track {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    padding-right: 20px;
+  }
+  .tl-month {
+    font-size: 10px; font-weight: 500;
+    color: var(--text-faint); text-align: center;
+    font-family: ui-monospace, monospace;
+    padding: 4px 0;
+    border-left: 1px solid var(--border);
+  }
+  .tl-month:first-child { border-left: none; }
+  .tl-month.ms { color: var(--text); font-weight: 600; }
+  .tl-month.ms::after {
+    content: attr(data-ms);
+    display: block;
+    font-size: 9px; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--mega);
+    text-shadow: 0 0 6px var(--mega-glow);
+    margin-top: 2px;
+  }
+  .tl-month.ms.sn::after { color: var(--sd); text-shadow: 0 0 6px var(--sd-glow); }
+
+  .tl-row { display: contents; }
+  .tl-row.hidden > * { display: none !important; }
+
+  .tl-name {
+    padding: 10px 16px 10px 20px;
+    border-left: 2px solid var(--border);
+    display: flex; flex-direction: column; justify-content: center;
+    min-height: 76px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tl-row.mega .tl-name { border-left-color: var(--mega); box-shadow: -4px 0 12px -4px var(--mega-glow); }
+  .tl-row.kd   .tl-name { border-left-color: var(--kd);   box-shadow: -4px 0 12px -4px var(--kd-glow); }
+  .tl-row.sd   .tl-name { border-left-color: var(--sd);   box-shadow: -4px 0 12px -4px var(--sd-glow); }
+  .tl-name-main { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; }
+  .tl-name-sub {
+    font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-faint); font-family: ui-monospace, monospace; margin-top: 2px;
+  }
+  .tl-row.mega .tl-name-sub { color: var(--mega); }
+  .tl-row.kd   .tl-name-sub { color: var(--kd); }
+  .tl-row.sd   .tl-name-sub { color: var(--sd); }
+
+  .tl-track {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 22px;
+    grid-auto-flow: dense;
+    gap: 3px;
+    padding: 8px 20px 8px 0;
+    border-bottom: 1px solid var(--border);
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc((100% - 20px) / 12 - 1px),
+      rgba(255,255,255,0.04) calc((100% - 20px) / 12 - 1px),
+      rgba(255,255,255,0.04) calc((100% - 20px) / 12)
+    );
+  }
+  .tl-grid > .tl-row:last-of-type .tl-track,
+  .tl-grid > .tl-row:last-of-type .tl-name { border-bottom: none; }
+
+  .tl-bar {
+    padding: 2px 7px; font-size: 10.5px; line-height: 18px;
+    border-radius: 2px; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+    font-weight: 500; cursor: default;
+    border: 1px solid; background-color: transparent;
+    transition: all 0.15s;
+  }
+  .tl-bar:hover { filter: brightness(1.35); }
+  .tl-bar.b-intro { border-color: rgba(168, 85, 247, 0.5); background-color: rgba(168, 85, 247, 0.1); color: #D8B4FE; }
+  .tl-bar.b-core  { border-color: rgba(236, 72, 153, 0.5); background-color: rgba(236, 72, 153, 0.1); color: #F9A8D4; }
+  .tl-bar.b-ebs   { border-color: rgba(245, 158, 11, 0.5); background-color: rgba(245, 158, 11, 0.1); color: #FCD34D; }
+  .tl-bar.b-adv   { border-color: rgba(239, 68, 68, 0.5);  background-color: rgba(239, 68, 68, 0.1);  color: #FCA5A5; }
+  .tl-bar.b-final { border-color: rgba(16, 185, 129, 0.5); background-color: rgba(16, 185, 129, 0.1); color: #6EE7B7; }
+  .tl-bar.b-sub   { border-color: rgba(99, 102, 241, 0.5); background-color: rgba(99, 102, 241, 0.08); color: #A5B4FC; font-style: italic; }
+
+  /* tooltip */
+  .tl-tooltip {
+    position: fixed; z-index: 1000;
+    background: var(--panel-2);
+    border: 1px solid var(--border-hover);
+    border-radius: 4px;
+    padding: 14px 16px;
+    min-width: 260px; max-width: 340px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+    pointer-events: none;
+    opacity: 0; transform: translateY(4px);
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .tl-tooltip.show { opacity: 1; transform: translateY(0); }
+  .tl-tooltip.mega { border-left: 2px solid var(--mega); }
+  .tl-tooltip.kd   { border-left: 2px solid var(--kd); }
+  .tl-tooltip.sd   { border-left: 2px solid var(--sd); }
+  .tt-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+  .tt-title {
+    font-size: 15px; font-weight: 700;
+    letter-spacing: -0.02em; color: var(--text);
+    line-height: 1.3;
+  }
+  .tt-acad {
+    flex-shrink: 0;
+    font-size: 9px; font-family: ui-monospace, monospace;
+    letter-spacing: 0.15em; padding: 2px 6px; border-radius: 2px;
+    white-space: nowrap;
+  }
+  .tl-tooltip.mega .tt-acad { color: var(--mega); border: 1px solid var(--mega); }
+  .tl-tooltip.kd   .tt-acad { color: var(--kd);   border: 1px solid var(--kd); }
+  .tl-tooltip.sd   .tt-acad { color: var(--sd);   border: 1px solid var(--sd); }
+  .tt-alias {
+    font-size: 11px; font-family: ui-monospace, monospace;
+    color: var(--text-faint); margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+  .tt-meta {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    font-size: 9.5px; font-family: ui-monospace, monospace;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 8px 0;
+    border-top: 1px dashed var(--border);
+    border-bottom: 1px dashed var(--border);
+    margin-bottom: 10px;
+  }
+  .tt-meta span b { color: var(--text-dim); font-weight: 500; margin-right: 6px; }
+  .tt-meta span.v { color: var(--text); }
+  .tt-desc {
+    font-size: 12.5px; color: var(--text);
+    line-height: 1.65;
+  }
+  .tt-target {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    font-size: 11px; color: var(--text-dim);
+  }
+  .tt-target b {
+    font-family: ui-monospace, monospace;
+    font-size: 9px; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600;
+    margin-right: 8px;
+  }
+
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 4px; padding: 24px;
+    position: relative; overflow: hidden;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .card.mega::before { background: var(--mega); box-shadow: 0 0 12px var(--mega); }
+  .card.kd::before   { background: var(--kd);   box-shadow: 0 0 12px var(--kd); }
+  .card.sd::before   { background: var(--sd);   box-shadow: 0 0 12px var(--sd); }
+  .card:hover { border-color: var(--border-hover); transform: translateY(-1px); }
+  .card:hover::before { height: 3px; }
+
+  .card-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .card-head h3 { font-size: 28px; font-weight: 800; margin: 0; letter-spacing: -0.03em; }
+  .card-head .acad-pill {
+    font-size: 10px; font-family: ui-monospace, monospace;
+    padding: 4px 8px; border-radius: 2px; letter-spacing: 0.1em;
+  }
+  .card.mega .acad-pill { color: var(--mega); border: 1px solid var(--mega); }
+  .card.kd   .acad-pill { color: var(--kd);   border: 1px solid var(--kd); }
+  .card.sd   .acad-pill { color: var(--sd);   border: 1px solid var(--sd); }
+
+  .density {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+    margin-bottom: 14px;
+  }
+  .density-label {
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-faint);
+    min-width: 50px; font-family: ui-monospace, monospace;
+  }
+  .density-bar { flex: 1; display: flex; gap: 2px; }
+  .density-bar span {
+    flex: 1; height: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 1px;
+  }
+  .card.mega .density-bar span.on { background: var(--mega); box-shadow: 0 0 6px var(--mega-glow); }
+  .card.kd   .density-bar span.on { background: var(--kd);   box-shadow: 0 0 6px var(--kd-glow); }
+  .card.sd   .density-bar span.on { background: var(--sd);   box-shadow: 0 0 6px var(--sd-glow); }
+  .density-count {
+    font-family: ui-monospace, monospace; font-size: 11px;
+    color: var(--text-dim); min-width: 32px; text-align: right;
+  }
+
+  .card-pos {
+    font-size: 12px; color: var(--text-dim); line-height: 1.6;
+    padding-bottom: 16px; margin-bottom: 16px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .card-pos b { color: var(--text); font-weight: 600; }
+
+  .card-section { margin-bottom: 12px; }
+  .card-section:last-child { margin-bottom: 0; }
+  .card-section-label {
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-faint);
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .card-section-label .pdot { width: 5px; height: 5px; border-radius: 50%; }
+  .card-section ul {
+    list-style: none; margin: 0; padding: 0;
+    font-size: 12.5px; line-height: 1.7;
+  }
+  .card-section li { color: var(--text); }
+  .card-section li small { color: var(--text-dim); font-size: 11px; margin-left: 4px; }
+  .card[data-acad].hidden { display: none; }
+
+  .card-hint {
+    position: absolute; bottom: 10px; right: 12px;
+    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-faint); font-family: ui-monospace, monospace;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .card:hover .card-hint { opacity: 1; }
+
+  .note {
+    margin-top: 48px; padding: 16px;
+    border: 1px dashed var(--border); border-radius: 4px;
+    font-size: 11px; color: var(--text-faint);
+    font-family: ui-monospace, monospace; line-height: 1.8;
+  }
+  .note b { color: var(--text-dim); }
+
+  /* HEATMAP */
+  .heatmap {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 4px; padding: 20px; overflow: hidden;
+  }
+  .hm-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr 72px;
+    column-gap: 12px;
+  }
+  .hm-head-label, .hm-head-months, .hm-head-total {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+  }
+  .hm-head-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--text-faint);
+    align-self: end; padding-left: 16px;
+  }
+  .hm-head-months {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+  }
+  .hm-month {
+    text-align: center; font-size: 10px;
+    font-family: ui-monospace, monospace;
+    color: var(--text-faint);
+    padding: 4px 0;
+  }
+  .hm-head-total {
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text-faint);
+    text-align: right; align-self: end; padding-right: 8px;
+  }
+
+  .hm-row { display: contents; }
+  .hm-row.hidden > * { display: none !important; }
+
+  .hm-row .hm-name {
+    padding: 6px 0 6px 16px;
+    border-left: 2px solid var(--border);
+    font-size: 13px; font-weight: 600;
+    display: flex; flex-direction: column; justify-content: center;
+    min-height: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hm-row.mega .hm-name { border-left-color: var(--mega); }
+  .hm-row.kd   .hm-name { border-left-color: var(--kd); }
+  .hm-row.sd   .hm-name { border-left-color: var(--sd); }
+  .hm-name-sub {
+    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-faint); font-family: ui-monospace, monospace;
+    margin-top: 2px; font-weight: 500;
+  }
+  .hm-row.mega .hm-name-sub { color: var(--mega); }
+  .hm-row.kd   .hm-name-sub { color: var(--kd); }
+  .hm-row.sd   .hm-name-sub { color: var(--sd); }
+
+  .hm-cells {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    gap: 3px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    align-self: stretch;
+  }
+  .hm-cell {
+    height: 28px; border-radius: 2px;
+    background: rgba(255,255,255,0.025);
+    position: relative;
+    transition: filter 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hm-row.mega .hm-cell[data-c]:not([data-c="0"]) { background-color: rgba(255, 45, 149, var(--o, 0.1)); }
+  .hm-row.kd   .hm-cell[data-c]:not([data-c="0"]) { background-color: rgba(0, 229, 255,  var(--o, 0.1)); }
+  .hm-row.sd   .hm-cell[data-c]:not([data-c="0"]) { background-color: rgba(181, 255, 30, var(--o, 0.1)); }
+  .hm-row.mega .hm-cell.peak { box-shadow: 0 0 10px var(--mega-glow); }
+  .hm-row.kd   .hm-cell.peak { box-shadow: 0 0 10px var(--kd-glow); }
+  .hm-row.sd   .hm-cell.peak { box-shadow: 0 0 10px var(--sd-glow); }
+  .hm-cell:hover { filter: brightness(1.5); }
+  .hm-cell .n {
+    font-size: 10.5px;
+    font-family: ui-monospace, monospace;
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+  }
+  .hm-cell[data-c="0"] .n { color: var(--text-faint); opacity: 0.35; }
+
+  .hm-total {
+    font-family: ui-monospace, monospace; font-size: 12px;
+    color: var(--text); text-align: right;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--border);
+    min-height: 36px; display: flex; align-items: center; justify-content: flex-end;
+    gap: 4px;
+  }
+  .hm-total small { font-size: 9px; color: var(--text-faint); }
+
+  /* heatmap footer: column sums bar */
+  .hm-foot {
+    display: grid;
+    grid-template-columns: 140px 1fr 72px;
+    column-gap: 12px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+  }
+  .hm-foot-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-faint); font-family: ui-monospace, monospace;
+    padding-left: 16px;
+    display: flex; align-items: center;
+  }
+  .hm-foot-bar {
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px;
+    align-items: end;
+    height: 56px;
+  }
+  .hm-foot-col {
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    align-items: center;
+    position: relative;
+  }
+  .hm-foot-col .bar {
+    width: 100%;
+    background: linear-gradient(to top, var(--p-sub), rgba(99, 102, 241, 0.25));
+    border-radius: 1px 1px 0 0;
+    min-height: 2px;
+  }
+  .hm-foot-col .num {
+    font-size: 9.5px; font-family: ui-monospace, monospace;
+    color: var(--text-dim);
+    position: absolute; top: 0;
+  }
+  .hm-foot-total {
+    font-family: ui-monospace, monospace; font-size: 12px;
+    color: var(--text); text-align: right;
+    padding: 0 8px;
+    display: flex; align-items: center; justify-content: flex-end;
+    gap: 4px;
+  }
+  .hm-foot-total small { font-size: 9px; color: var(--text-faint); }
+
+  @media (max-width: 960px) {
+    .container { padding: 32px 20px 64px; }
+    .hero { margin-bottom: 40px; }
+    .hero h1 { font-size: 36px; }
+    .hero-tag { font-size: 10.5px; margin-bottom: 16px; }
+
+    .section-label { margin: 40px 0 16px; gap: 12px; }
+    .section-label h2 { font-size: 12px; letter-spacing: 0.2em; }
+    .section-label .desc { display: none; }
+
+    .filter-bar { padding: 10px; gap: 6px; }
+    .filter-btn { font-size: 12px; padding: 7px 12px; }
+
+    .matrix, .timeline, .heatmap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .matrix table { min-width: 880px; }
+    .tl-grid, .hm-grid, .hm-foot { min-width: 880px; }
+
+    .cards { grid-template-columns: 1fr; gap: 14px; }
+    .legend { font-size: 10.5px; gap: 10px 20px; padding: 10px 14px; }
+    .hero-meta { gap: 16px; font-size: 11px; }
+  }
+
+  @media (max-width: 560px) {
+    body { background-size: 32px 32px; }
+    .container { padding: 20px 12px 48px; }
+
+    .hero { margin-bottom: 32px; }
+    .hero-tag {
+      font-size: 10px; padding: 5px 10px;
+      letter-spacing: 0.18em; margin-bottom: 12px;
+    }
+    .hero h1 { font-size: 30px; line-height: 1.1; }
+    .hero h1 span { text-shadow: 0 0 16px var(--mega-glow); }
+
+    .filter-bar {
+      padding: 8px; gap: 5px; margin-bottom: 24px;
+      border-radius: 3px;
+    }
+    .filter-btn {
+      font-size: 11.5px; padding: 6px 10px; gap: 6px;
+    }
+    .filter-btn::before { width: 5px; height: 5px; }
+
+    .section-label { margin: 32px 0 12px; gap: 10px; }
+    .section-label h2 { font-size: 11.5px; letter-spacing: 0.18em; }
+    .section-label .idx { font-size: 10px; }
+
+    /* matrix tighter on phone */
+    .matrix table { min-width: 780px; font-size: 11.5px; }
+    .matrix th, .matrix td { padding: 10px 8px; }
+    .matrix thead th { font-size: 9.5px; padding: 9px 8px; }
+    .tname { width: 128px; }
+    .tname-inner { padding-left: 10px; }
+    .tname h3 { font-size: 16px; }
+    .tname .acad { font-size: 9px; }
+    .cell-item { font-size: 11.5px; padding: 3px 0; }
+    .cell-item small { font-size: 10px; }
+    .cell-item .tag { font-size: 9px; padding: 1px 4px; }
+
+    /* timeline */
+    .tl-grid, .hm-grid, .hm-foot {
+      min-width: 780px;
+      grid-template-columns: 110px 1fr;
+      column-gap: 10px;
+    }
+    .hm-grid, .hm-foot {
+      grid-template-columns: 110px 1fr 54px;
+    }
+    .tl-head-name, .hm-head-label { padding-left: 12px; font-size: 9px; }
+    .tl-name, .hm-name { padding: 8px 10px 8px 12px; min-height: 60px; }
+    .tl-name-main { font-size: 13.5px; }
+    .tl-name-sub, .hm-name-sub { font-size: 9px; }
+    .tl-track { padding: 7px 14px 7px 0; grid-auto-rows: 20px; gap: 2px; }
+    .tl-bar { font-size: 10px; line-height: 16px; padding: 2px 5px; }
+    .tl-month { font-size: 9.5px; }
+    .tl-month.ms::after { font-size: 8px; margin-top: 1px; }
+
+    /* heatmap */
+    .hm-cells { padding: 3px 0; gap: 2px; }
+    .hm-cell { height: 24px; }
+    .hm-cell .n { font-size: 9.5px; }
+    .hm-total, .hm-foot-total { font-size: 11px; padding: 0 6px; }
+    .hm-foot-label { font-size: 9px; padding-left: 12px; }
+
+    /* cards */
+    .card { padding: 20px 18px; }
+    .card-head h3 { font-size: 24px; }
+    .card-head .acad-pill { font-size: 9px; padding: 3px 7px; }
+    .density-label { font-size: 9px; min-width: 46px; }
+    .density-count { font-size: 10.5px; }
+    .card-pos { font-size: 11.5px; }
+    .card-section ul { font-size: 12px; }
+    .card-section li small { font-size: 10.5px; }
+
+    .legend {
+      font-size: 10px; gap: 8px 16px; padding: 10px 12px;
+    }
+    .legend-item .pdot { width: 7px; height: 7px; }
+
+    .note { font-size: 10px; padding: 14px; line-height: 1.7; }
+
+    /* tooltip becomes bottom sheet on phone */
+    .tl-tooltip {
+      left: 12px !important;
+      right: 12px !important;
+      top: auto !important;
+      bottom: 12px !important;
+      min-width: auto; max-width: none;
+      transform: translateY(8px);
+      padding: 14px;
+    }
+    .tl-tooltip.show { transform: translateY(0); }
+    .tt-title { font-size: 14px; }
+    .tt-desc { font-size: 12px; }
+    .tt-meta { font-size: 9px; gap: 10px; }
+
+    /* hide small hover hints on touch */
+    .card-hint { display: none; }
+  }
+
+  /* enable tap feedback on cards & bars */
+  @media (hover: none) {
+    .card:hover { transform: none; }
+    .tl-bar:hover { filter: none; }
+    .tl-bar:active { filter: brightness(1.4); }
+    .card:active { border-color: var(--border-hover); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <section class="hero">
+    <div class="hero-tag">KOREAN · CURRICULUM · V0.4</div>
+    <h1>국어 강사<br><span>연간 커리큘럼</span></h1>
+  </section>
+
+  <div class="filter-bar">
+    <button class="filter-btn all active" data-filter="all">전체</button>
+    <button class="filter-btn mega" data-filter="mega">메가스터디</button>
+    <button class="filter-btn kd" data-filter="kd">강남대성</button>
+    <button class="filter-btn sd" data-filter="sd">시대인재</button>
+    <button class="filter-btn orb" data-filter="orb">오르비</button>
+  </div>
+
+  <!-- 01 MATRIX -->
+  <div class="section-label">
+    <span class="idx">/ 01</span>
+    <h2>연간 커리큘럼</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:160px;">강사 / INSTRUCTOR</th>
+          <th><span class="pdot p-intro"></span>입문·기초</th>
+          <th><span class="pdot p-core"></span>개념·기출</th>
+          <th><span class="pdot p-ebs"></span>EBS 연계</th>
+          <th><span class="pdot p-adv"></span>심화·고난도</th>
+          <th><span class="pdot p-final"></span>파이널·실모</th>
+          <th><span class="pdot p-sub"></span>월간·주간·상시</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr data-acad="mega" id="row-kmc">
+          <td class="tname mega"><div class="tname-inner"><h3>강민철</h3><div class="acad">MEGA · ONLINE</div></div></td>
+          <td><span class="cell-empty">—</span></td>
+          <td>
+            <span class="cell-item">강민철의 기출 분석 <span class="tag">강기분</span><small>옛 기출 · 12월 말–2월 초</small></span>
+            <span class="cell-item">새로운 기출 분석 <span class="tag">새기분</span><small>최근 기출 · 12월 말–2월 중</small></span>
+          </td>
+          <td><span class="cell-item">강민철의 EBS 분석<small>연계 N제 · 3월 말 개강</small></span></td>
+          <td><span class="cell-item">FEED100<small>독서 고난도</small></span></td>
+          <td>
+            <span class="cell-item">강평업 <span class="tag">중간 점검</span></span>
+            <span class="cell-item">무제 <span class="tag">주간지</span><small>EBS 연계·낯선 지문</small></span>
+            <span class="cell-item">우리들의 기출 분석<small>6·9모+기존 통합</small></span>
+            <span class="cell-item">강민철 실전 모의고사</span>
+          </td>
+          <td>
+            <span class="cell-item">인(in)강민철 <span class="tag">1–8호</span><small>매일 2지문</small></span>
+            <span class="cell-item">이감 모의고사 해설</span>
+          </td>
+        </tr>
+
+        <tr data-acad="mega" id="row-kdw">
+          <td class="tname mega"><div class="tname-inner"><h3>김동욱</h3><div class="acad">MEGA · ONLINE</div></div></td>
+          <td>
+            <span class="cell-item">수국김<small>기초 · 12월 초–말</small></span>
+            <span class="cell-item">RESET 국어<small>6평 이후 리셋</small></span>
+          </td>
+          <td>
+            <span class="cell-item">일 클래스 <span class="tag">개념완성</span></span>
+            <span class="cell-item">취 클래스 <span class="tag">실력완성</span></span>
+            <span class="cell-item">반응 / SWITCH ON<small>기출 반응 · 2–3월</small></span>
+            <span class="cell-item">고전 시가 / 문법 BASIC / 화작의 유형</span>
+            <span class="cell-item">CHECKMATE 언어·독서·문학</span>
+          </td>
+          <td><span class="cell-item">수특 문학 / 수완 문학</span></td>
+          <td>
+            <span class="cell-item">월 클래스 <span class="tag">심화훈련</span></span>
+            <span class="cell-item">BON 바탕 언매</span>
+          </td>
+          <td>
+            <span class="cell-item">장 클래스 <span class="tag">파이널</span></span>
+            <span class="cell-item">언매 파이널 클래스</span>
+          </td>
+          <td><span class="cell-empty">—</span></td>
+        </tr>
+
+        <tr data-acad="mega" id="row-jht">
+          <td class="tname mega"><div class="tname-inner"><h3>전형태</h3><div class="acad">MEGA · ONLINE</div></div></td>
+          <td>
+            <span class="cell-item">올인원 베이직</span>
+            <span class="cell-item">문개집 <span class="tag">문학 개념.zip</span></span>
+          </td>
+          <td>
+            <span class="cell-item">ALL NEW 문학 / 독서 올인원</span>
+            <span class="cell-item">고전 시가 올인원</span>
+            <span class="cell-item">언어와 매체 / 화작 올인원</span>
+            <span class="cell-item">6·9평 집중 분석 특강</span>
+          </td>
+          <td>
+            <span class="cell-item">나BS 수특 문학 / 수완 문학</span>
+            <span class="cell-item">EBS 연계 문학 모의고사 10회</span>
+            <span class="cell-item">나BS 문법</span>
+          </td>
+          <td>
+            <span class="cell-item">언어 클리어<small>문법 압축 심화</small></span>
+            <span class="cell-item">국어 클리어<small>문학·독서 점검</small></span>
+          </td>
+          <td>
+            <span class="cell-item">나BS 파이널.zip</span>
+            <span class="cell-item">파이널 최종점검</span>
+            <span class="cell-item">파이널 문법 특강 + 언매 모고 12회</span>
+            <span class="cell-item">전형태 파이널 모의고사</span>
+          </td>
+          <td><span class="cell-empty">—</span></td>
+        </tr>
+
+        <tr data-acad="mega" id="row-rhj">
+          <td class="tname mega"><div class="tname-inner"><h3>류현준</h3><div class="acad">MEGA · 러셀</div></div></td>
+          <td><span class="cell-item">류현준의 웜업 <span class="tag">시즌1</span><small>1–2월 겨울방학</small></span></td>
+          <td>
+            <span class="cell-item">생각의 전환 <span class="tag">독서</span><small>고3 독해 접근·문장 연결·구조 파악</small></span>
+            <span class="cell-item">생각의 과정 <span class="tag">문학</span><small>시어·작품 감상 사고법</small></span>
+            <span class="cell-item">언어 올인원 <span class="tag">문법 8주</span><small>1월부터 · 전 범위 특강</small></span>
+          </td>
+          <td>
+            <span class="cell-item">생각의 확장 <span class="tag">시즌2</span><small>EBS 수특 · 3–5월</small></span>
+            <span class="cell-item">적용 연습 <span class="tag">시즌3</span><small>EBS 수완 · 6–8월</small></span>
+          </td>
+          <td><span class="cell-item">1등급 독서·문학 특강<small>법·경제·과학 배경지식 + 심화 개념어 · 10개년 기출</small></span></td>
+          <td>
+            <span class="cell-item">피날레 <span class="tag">시즌4</span><small>9월~수능 · EBS 총정리</small></span>
+            <span class="cell-item">이감 / 상상 실전 모의<small>5·8·11월 현장 모의</small></span>
+          </td>
+          <td>
+            <span class="cell-item">월간 시그니처 <span class="tag">월간지</span></span>
+            <span class="cell-item">주간 류현준 <span class="tag">주간지</span><small>수준별 맞춤 과제</small></span>
+            <span class="cell-item">생각의 정리<small>한자어·필수 문학 단어장 · 주 테스트</small></span>
+          </td>
+        </tr>
+
+        <tr data-acad="mega" id="row-kgm">
+          <td class="tname mega"><div class="tname-inner"><h3>김강민</h3><div class="acad">MEGA · 러셀</div></div></td>
+          <td><span class="cell-item">창제 <span class="tag">시즌1·윈터</span><small>1–2월 · 기본 개념·피지컬</small></span></td>
+          <td>
+            <span class="cell-item">창제 독서 <span class="tag">두 가지 도구</span><small>다양한 구조 적용</small></span>
+            <span class="cell-item">창제 문학<small>시·소설 감상 + 선지 판단 기준</small></span>
+            <span class="cell-item">해례본 <span class="tag">시즌2</span><small>경제·법·과학·기술·철학 제재 확장 · 3–4월</small></span>
+          </td>
+          <td>
+            <span class="cell-item">에센셜 <span class="tag">테로 ENC 협업</span><small>배경지식·고전시가 전문·줄거리 요약</small></span>
+            <span class="cell-item">해례본 EBS <span class="tag">자체 제작</span><small>'두 가지 도구' EBS 실전 적용</small></span>
+          </td>
+          <td>
+            <span class="cell-item">언해본 <span class="tag">시즌3</span><small>브레턴우즈·헤겔 등 고난도 기출 · 6–7월</small></span>
+            <span class="cell-item">언매 / 화작 특강<small>방학 중 특강 + 전 범위 영상</small></span>
+          </td>
+          <td>
+            <span class="cell-item">결 <span class="tag">시즌4</span><small>LEET 선별 · 사설 비기출 · 사관/교육청 기출</small></span>
+            <span class="cell-item">이감 모의 <span class="tag">5·8·10월</span><small>현장 응시 + 해설 강의</small></span>
+          </td>
+          <td><span class="cell-item">워크북<small>현장 강의 숙제 + 어려운 지문 추가 해설 영상</small></span></td>
+        </tr>
+
+        <tr data-acad="mega orb" id="row-mck">
+          <td class="tname mega"><div class="tname-inner"><h3>미친국어</h3><div class="acad">MEGA 러셀 · 오르비</div></div></td>
+          <td>
+            <span class="cell-item">평행론 <span class="tag">시즌1</span><small>1–2월 · 갈래별 '생각의 모양' 정립</small></span>
+            <span class="cell-item">언매 5회 특강 <span class="tag">리얼 노베이스</span><small>문법 기초</small></span>
+          </td>
+          <td>
+            <span class="cell-item">평가원 행동 훈련 <span class="tag">시즌2</span><small>기출 난이도별 적용 · 3–5월</small></span>
+          </td>
+          <td>
+            <span class="cell-item">EBS 에센셜<small>수특·수완 문학 선별 · 효율 대비</small></span>
+          </td>
+          <td>
+            <span class="cell-item">평가원 행동 강화 <span class="tag">평행강·시즌3</span><small>2개년 기출 + LEET·MEET·사관 · 6–8월</small></span>
+            <span class="cell-item">미친국어 압축반 <span class="tag">4주 완성</span><small>6–8월 · 반수생·상반기 공백 대상</small></span>
+          </td>
+          <td>
+            <span class="cell-item">미친국어 파이널 <span class="tag">시즌4</span><small>6·9평 교집합·기조 정리 · 9–10월</small></span>
+            <span class="cell-item">평가원 행동 증명 <span class="tag">시즌5·현장 전용</span><small>이감 모의 + 유사 기출 연결 · 9–11월</small></span>
+          </td>
+          <td>
+            <span class="cell-item">안정적 10분컷 <span class="tag">화작 시그니처</span><small>리뉴얼 · 방대 체계화</small></span>
+            <span class="cell-item">엔제 / 선별 문항<small>교육청·사관·리트·미트 선별</small></span>
+          </td>
+        </tr>
+
+        <tr data-acad="kd" id="row-ksr">
+          <td class="tname kd"><div class="tname-inner"><h3>김승리</h3><div class="acad">KANGDAE · ONLINE</div></div></td>
+          <td><span class="cell-empty">—</span></td>
+          <td>
+            <span class="cell-item">All Of KICE [Origin]<small>작년 수능 분석</small></span>
+            <span class="cell-item">Predator : 독서 / 문학 <span class="tag">기출</span></span>
+            <span class="cell-item">Predator : 독서 W.O.W<small>주제별 54지문</small></span>
+          </td>
+          <td>
+            <span class="cell-item">KBS in VIC-FLIX<small>수특·수완 문학</small></span>
+            <span class="cell-item">EB-Schema in VIC-FLIX<small>수특·수완 독서</small></span>
+          </td>
+          <td>
+            <span class="cell-item">결격사유 <span class="tag">N제</span><small>미런칭</small></span>
+            <span class="cell-item">아수라일지라도<small>전 커리 압축·행동강령</small></span>
+          </td>
+          <td>
+            <span class="cell-item">Test 1s rhythM<small>하프 모의 · 기타 기출</small></span>
+            <span class="cell-item">김승리의 선택 언매 / 화작 파이널</span>
+          </td>
+          <td>
+            <span class="cell-item">매월승리 <span class="tag">월간지</span></span>
+            <span class="cell-item">선택 언매 시즌1·2·Short-Kit</span>
+            <span class="cell-item">선택 화작 시즌1</span>
+          </td>
+        </tr>
+
+        <tr data-acad="kd" id="row-ydj">
+          <td class="tname kd"><div class="tname-inner"><h3>유대종</h3><div class="acad">KANGDAE · ONLINE</div></div></td>
+          <td><span class="cell-item">국어 치열하게 독하게<small>기초 입문</small></span></td>
+          <td>
+            <span class="cell-item">인셉션 <span class="tag">평가원 기출</span></span>
+            <span class="cell-item">파노라마<small>주제별 독서·스키마</small></span>
+            <span class="cell-item">언매총론 / 화작총론 <span class="tag">개념</span></span>
+            <span class="cell-item">언매·화작 기출의 실전적 해석</span>
+          </td>
+          <td>
+            <span class="cell-item">EBS OF LINE<small>독서 강훈련</small></span>
+            <span class="cell-item">E뮨 연계 문학 모의고사 / OVS 문학</span>
+          </td>
+          <td>
+            <span class="cell-item">진또배기 <span class="tag">하드코어</span><small>고난도 기출변형</small></span>
+            <span class="cell-item">언매·화작 심화 스팀팩 <span class="tag">자작</span></span>
+          </td>
+          <td>
+            <span class="cell-item">유대종의 미<small>고난도 수능 예측</small></span>
+            <span class="cell-item">유대종 모의고사</span>
+          </td>
+          <td><span class="cell-item">데일리 유대종 <span class="tag">시즌 1–3</span></span></td>
+        </tr>
+
+        <tr data-acad="kd" id="row-lsm">
+          <td class="tname kd"><div class="tname-inner"><h3>이승모</h3><div class="acad">KANGDAE · 오프라인</div></div></td>
+          <td>
+            <span class="cell-item">언어와 매체 특강 <span class="tag">1–2월</span><small>오프라인 특강 · 3월부터 온라인 무료</small></span>
+          </td>
+          <td>
+            <span class="cell-item">천문학 <span class="tag">시즌1·문학</span><small>5개년 기출 3회독 · 15주</small></span>
+            <span class="cell-item">밑빠진 독해 물붓기 <span class="tag">시즌1·비문학</span><small>지문 100% 이해까지</small></span>
+          </td>
+          <td>
+            <span class="cell-item">노력의 온도 <span class="tag">EBS 스키마</span><small>수특·수완 작품·배경지식 · 격주</small></span>
+          </td>
+          <td>
+            <span class="cell-item">고민하는 포인트 <span class="tag">시즌2·문학</span><small>심화 사고 · 4–8월</small></span>
+            <span class="cell-item">밑빠진 독해 물붓기 시즌2 <span class="tag">비문학</span></span>
+            <span class="cell-item">화법과 작문 <span class="tag">4월 영상 무료</span></span>
+          </td>
+          <td>
+            <span class="cell-item">결승전 <span class="tag">파이널·문학</span><small>8월–수능</small></span>
+            <span class="cell-item">밑빠진 독해 물붓기 시즌3</span>
+            <span class="cell-item">이승 / 저승 모의고사<small>이승=숙제(쉬움) · 저승=수업(고난도)</small></span>
+          </td>
+          <td>
+            <span class="cell-item">결승선 <span class="tag">주간지</span><small>하프 모의(E·필수) + 이C·시관리(C·선택)</small></span>
+            <span class="cell-item">고전시가 정리집</span>
+          </td>
+        </tr>
+
+        <tr data-acad="sd" id="row-key">
+          <td class="tname sd"><div class="tname-inner"><h3>강은양</h3><div class="acad">SIDAE · OFFLINE</div></div></td>
+          <td><span class="cell-empty">—</span></td>
+          <td>
+            <span class="cell-item">K시즌 <span class="tag">12–2월</span><small>평가원 패턴 학습</small></span>
+            <span class="cell-item">E시즌 <span class="tag">3–6월</span><small>테마별 학습 + 실전 모의</small></span>
+            <span class="cell-item">12월 문학 / 3·8월 언매 / 5월 화작 특강</span>
+          </td>
+          <td>
+            <span class="cell-item">ReBS 수능특강 <span class="tag">분석집</span></span>
+            <span class="cell-item">수능완성 분석집</span>
+            <span class="cell-item">9월 ReBS 운문특강</span>
+          </td>
+          <td><span class="cell-item">Y시즌 <span class="tag">7–10월</span><small>평가원 패턴 체화</small></span></td>
+          <td>
+            <span class="cell-item">KEY시즌 <span class="tag">11월</span></span>
+            <span class="cell-item">KEY 모의고사 · 이감 / 상상</span>
+          </td>
+          <td><span class="cell-item">월간지<small>주요 기출 + EBS N제 + 하프 모의</small></span></td>
+        </tr>
+
+        <tr data-acad="sd" id="row-bdj">
+          <td class="tname sd"><div class="tname-inner"><h3>방동진</h3><div class="acad">SIDAE · OFFLINE</div></div></td>
+          <td><span class="cell-item">더 국어 <span class="tag">수능 입문</span></span></td>
+          <td>
+            <span class="cell-item">더 문학 / 더 독서 <span class="tag">개념</span></span>
+            <span class="cell-item">더 언매 / 고득점 언매 종결자</span>
+            <span class="cell-item">더 화작 / 고득점 화작 종결자</span>
+          </td>
+          <td><span class="cell-item">궁극의 100작품 <span class="tag">EBS</span></span></td>
+          <td><span class="cell-item">서바이벌 모의고사 <span class="tag">외부 콘텐츠</span></span></td>
+          <td><span class="cell-item">3·6·9평 실전 모의<small>이감 / 상상</small></span></td>
+          <td>
+            <span class="cell-item">매일 달리기 <span class="tag">주간지</span><small>매일 독서·문학 1지문 + 주 1세트</small></span>
+            <span class="cell-item">엑셀러레이터<small>개념 필기노트 제공</small></span>
+          </td>
+        </tr>
+
+        <tr data-acad="sd" id="row-scw">
+          <td class="tname sd"><div class="tname-inner"><h3>심찬우</h3><div class="acad">SIDAE · OFFLINE</div></div></td>
+          <td><span class="cell-empty">—</span></td>
+          <td>
+            <span class="cell-item">생각하며 글읽기 <span class="tag">독서</span></span>
+            <span class="cell-item">생각하며 감상하기 <span class="tag">문학</span></span>
+            <span class="cell-item">기출의 테마 1–3</span>
+          </td>
+          <td><span class="cell-empty">—</span></td>
+          <td><span class="cell-item">세계의 찬우화<small>고난도 지문</small></span></td>
+          <td><span class="cell-item">문학은 상위권의 변수다<small>6·9평 바탕 · 최고난도</small></span></td>
+          <td><span class="cell-empty">—</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 02 TIMELINE -->
+  <div class="section-label">
+    <span class="idx">/ 02</span>
+    <h2>연간 타임라인</h2>
+    <div class="rule"></div>
+    <span class="desc">12월 → 수능</span>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="pdot p-intro"></span>입문·기초 · 12–2월</div>
+    <div class="legend-item"><span class="pdot p-core"></span>개념·기출 · 2–5월</div>
+    <div class="legend-item"><span class="pdot p-ebs"></span>EBS 연계 · 3–6평</div>
+    <div class="legend-item"><span class="pdot p-adv"></span>심화·고난도 · 여름</div>
+    <div class="legend-item"><span class="pdot p-final"></span>파이널·실모 · 10–11월</div>
+    <div class="legend-item"><span class="pdot p-sub"></span>월간·주간·상시</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-grid">
+      <div class="tl-head-name">INSTRUCTOR</div>
+      <div class="tl-head-track">
+        <div class="tl-month">12</div>
+        <div class="tl-month">1</div>
+        <div class="tl-month">2</div>
+        <div class="tl-month ms" data-ms="3모">3</div>
+        <div class="tl-month">4</div>
+        <div class="tl-month">5</div>
+        <div class="tl-month ms" data-ms="6모">6</div>
+        <div class="tl-month">7</div>
+        <div class="tl-month">8</div>
+        <div class="tl-month ms" data-ms="9모">9</div>
+        <div class="tl-month">10</div>
+        <div class="tl-month ms sn" data-ms="수능">11</div>
+      </div>
+
+      <div class="tl-row mega" data-acad="mega">
+        <div class="tl-name"><div class="tl-name-main">강민철</div><div class="tl-name-sub">MEGA</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-core"  style="grid-column: 1/4;"  title="강기분 · 옛 기출">강기분</div>
+          <div class="tl-bar b-core"  style="grid-column: 1/4;"  title="새기분 · 최근 기출">새기분</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 4/8;"  title="강민철의 EBS 분석">EBS 분석</div>
+          <div class="tl-bar b-adv"   style="grid-column: 7/10;" title="FEED100 · 독서 고난도">FEED100</div>
+          <div class="tl-bar b-final" style="grid-column: 5/10;" title="강평업 · 중간 점검">강평업</div>
+          <div class="tl-bar b-final" style="grid-column: 9/13;" title="무제 · 파이널 주간지">무제</div>
+          <div class="tl-bar b-final" style="grid-column: 10/13;"title="우리들의 기출 분석">우리들의 기출</div>
+          <div class="tl-bar b-final" style="grid-column: 11/13;"title="실전 모의고사">실모</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="인(in)강민철 · 월간지">인강민철 (월간 1–8호)</div>
+        </div>
+      </div>
+
+      <div class="tl-row mega" data-acad="mega">
+        <div class="tl-name"><div class="tl-name-main">김동욱</div><div class="tl-name-sub">MEGA</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-intro" style="grid-column: 1/2;"  title="수국김 · 기초 입문">수국김</div>
+          <div class="tl-bar b-core"  style="grid-column: 2/4;"  title="일 클래스 · 개념완성">일 클래스</div>
+          <div class="tl-bar b-core"  style="grid-column: 3/5;"  title="반응 · SWITCH ON">반응</div>
+          <div class="tl-bar b-core"  style="grid-column: 4/7;"  title="취 클래스 · 실력완성">취 클래스</div>
+          <div class="tl-bar b-intro" style="grid-column: 7/8;"  title="RESET · 6평 이후">RESET</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 6/9;"  title="수특 · 수완 문학">수특/수완 문학</div>
+          <div class="tl-bar b-adv"   style="grid-column: 7/10;" title="월 클래스 · 심화훈련">월 클래스</div>
+          <div class="tl-bar b-adv"   style="grid-column: 8/10;" title="BON 바탕 언매">BON 바탕</div>
+          <div class="tl-bar b-final" style="grid-column: 10/13;"title="장 클래스 · 파이널">장 클래스</div>
+          <div class="tl-bar b-final" style="grid-column: 11/13;"title="언매 파이널">언매 파이널</div>
+        </div>
+      </div>
+
+      <div class="tl-row mega" data-acad="mega">
+        <div class="tl-name"><div class="tl-name-main">전형태</div><div class="tl-name-sub">MEGA</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-intro" style="grid-column: 1/3;"  title="올인원 베이직">올인원 베이직</div>
+          <div class="tl-bar b-intro" style="grid-column: 1/3;"  title="문개집">문개집</div>
+          <div class="tl-bar b-core"  style="grid-column: 3/7;"  title="올인원 시리즈 (문학/독서/고전/언매/화작)">올인원 시리즈</div>
+          <div class="tl-bar b-core"  style="grid-column: 7/8;"  title="6평 집중 분석">6평 특강</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 6/10;" title="나BS 수특 · 수완">나BS 수특/수완</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 7/10;" title="EBS 연계 문학 모의고사 10회">EBS 문학 모의</div>
+          <div class="tl-bar b-core"  style="grid-column: 10/11;"title="9평 특강">9평 특강</div>
+          <div class="tl-bar b-adv"   style="grid-column: 10/12;"title="언어/국어 클리어">클리어</div>
+          <div class="tl-bar b-final" style="grid-column: 11/13;"title="나BS 파이널 · 최종점검 · 실모">파이널 스택</div>
+        </div>
+      </div>
+
+      <div class="tl-row mega" data-acad="mega">
+        <div class="tl-name"><div class="tl-name-main">류현준</div><div class="tl-name-sub">MEGA · 러셀</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-core"  style="grid-column: 2/4;"  title="생각의 전환 · 독서">생각의 전환</div>
+          <div class="tl-bar b-core"  style="grid-column: 2/4;"  title="생각의 과정 · 문학">생각의 과정</div>
+          <div class="tl-bar b-core"  style="grid-column: 2/4;"  title="언어 올인원 · 문법 8주 특강">언어 올인원</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 4/7;"  title="시즌2 생각의 확장 · EBS 수특">시즌2 확장</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 7/10;" title="시즌3 적용 연습 · EBS 수완">시즌3 적용</div>
+          <div class="tl-bar b-adv"   style="grid-column: 3/10;" title="1등급 독서·문학 특강">1등급 특강</div>
+          <div class="tl-bar b-final" style="grid-column: 6/7;"  title="5월 실전 모의 · 이감/상상">5월 실모</div>
+          <div class="tl-bar b-final" style="grid-column: 9/10;" title="8월 실전 모의 · 이감/상상">8월 실모</div>
+          <div class="tl-bar b-final" style="grid-column: 10/13;"title="시즌4 피날레 · 총정리 + 최종 실전">시즌4 피날레</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="월간 시그니처 · 주간 류현준">월간·주간 류현준</div>
+        </div>
+      </div>
+
+      <div class="tl-row mega" data-acad="mega">
+        <div class="tl-name"><div class="tl-name-main">김강민</div><div class="tl-name-sub">MEGA · 러셀</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-core"  style="grid-column: 2/4;"  title="창제 독서 · 두 가지 도구">창제 독서</div>
+          <div class="tl-bar b-core"  style="grid-column: 2/4;"  title="창제 문학 · 감상법+선지 판단">창제 문학</div>
+          <div class="tl-bar b-core"  style="grid-column: 4/6;"  title="해례본 · 제재 확장">해례본</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 4/10;" title="에센셜 · 배경지식 (테로 ENC 협업)">에센셜</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 4/10;" title="해례본 EBS · 두 가지 도구 실전 적용">해례본 EBS</div>
+          <div class="tl-bar b-adv"   style="grid-column: 7/9;"  title="언해본 · 고난도 기출 (브레턴우즈·헤겔 등)">언해본</div>
+          <div class="tl-bar b-adv"   style="grid-column: 2/4;"  title="언매 / 화작 특강 · 방학 중">언매·화작 특강</div>
+          <div class="tl-bar b-final" style="grid-column: 6/7;"  title="5월 이감 현장 응시+해설">5월 이감</div>
+          <div class="tl-bar b-final" style="grid-column: 9/10;" title="8월 이감 현장 응시+해설">8월 이감</div>
+          <div class="tl-bar b-final" style="grid-column: 11/12;"title="10월 이감 현장 응시+해설">10월 이감</div>
+          <div class="tl-bar b-final" style="grid-column: 10/13;"title="결 · 시즌4 파이널 (LEET·사설·사관/교육청)">결 파이널</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="워크북 · 현장 강의 숙제 + 추가 해설 영상">워크북</div>
+        </div>
+      </div>
+
+      <div class="tl-row mega" data-acad="mega orb">
+        <div class="tl-name"><div class="tl-name-main">미친국어</div><div class="tl-name-sub">러셀 · 오르비</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-intro" style="grid-column: 1/3;"  title="언매 5회 특강 · 리얼 노베이스">언매 5회 특강</div>
+          <div class="tl-bar b-core"  style="grid-column: 2/4;"  title="평행론 · 시즌1 평가원 행동 이론">평행론</div>
+          <div class="tl-bar b-core"  style="grid-column: 4/7;"  title="평가원 행동 훈련 · 시즌2">행동 훈련</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 4/10;" title="EBS 에센셜 · 수특·수완 문학 선별">EBS 에센셜</div>
+          <div class="tl-bar b-adv"   style="grid-column: 7/10;" title="평행강 · 시즌3 행동 강화 (LEET·MEET·사관)">평행강</div>
+          <div class="tl-bar b-intro" style="grid-column: 7/9;"  title="미친국어 압축반 · 4주 완성">압축반</div>
+          <div class="tl-bar b-final" style="grid-column: 10/12;"title="미친국어 파이널 · 시즌4">시즌4 파이널</div>
+          <div class="tl-bar b-final" style="grid-column: 10/13;"title="평가원 행동 증명 · 시즌5 현장 전용">행동 증명</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="안정적 10분컷 · 화작 시그니처 (리뉴얼)">안정적 10분컷</div>
+        </div>
+      </div>
+
+      <div class="tl-row kd" data-acad="kd">
+        <div class="tl-name"><div class="tl-name-main">김승리</div><div class="tl-name-sub">KANGDAE</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-core"  style="grid-column: 1/3;"  title="All Of KICE [Origin]">Origin</div>
+          <div class="tl-bar b-core"  style="grid-column: 2/7;"  title="Predator : 독서 · 문학">Predator 독서/문학</div>
+          <div class="tl-bar b-core"  style="grid-column: 4/8;"  title="Predator : 독서 W.O.W">W.O.W</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 6/10;" title="KBS in VIC-FLIX · 수특/수완 문학">KBS VIC-FLIX</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 6/10;" title="EB-Schema in VIC-FLIX · 수특/수완 독서">EB-Schema</div>
+          <div class="tl-bar b-adv"   style="grid-column: 8/11;" title="결격사유 · N제">결격사유</div>
+          <div class="tl-bar b-final" style="grid-column: 10/13;"title="Test 1s rhythM · 하프 모의">Test 1s rhythM</div>
+          <div class="tl-bar b-final" style="grid-column: 11/13;"title="아수라일지라도 · 전 커리 압축">아수라</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="매월승리 · 월간지">매월승리 (월간)</div>
+        </div>
+      </div>
+
+      <div class="tl-row kd" data-acad="kd">
+        <div class="tl-name"><div class="tl-name-main">유대종</div><div class="tl-name-sub">KANGDAE</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-intro" style="grid-column: 1/3;"  title="국어 치열하게 독하게">치열하게 독하게</div>
+          <div class="tl-bar b-core"  style="grid-column: 3/7;"  title="인셉션 · 평가원 기출">인셉션</div>
+          <div class="tl-bar b-core"  style="grid-column: 4/8;"  title="파노라마 · 주제별 독서">파노라마</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 7/11;" title="EBS OF LINE · 독서 강훈련">EBS OF LINE</div>
+          <div class="tl-bar b-adv"   style="grid-column: 9/12;" title="진또배기 · 하드코어">진또배기</div>
+          <div class="tl-bar b-final" style="grid-column: 11/13;"title="유대종의 미 · 파이널">유대종의 미</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="데일리 유대종 시즌 1–3">데일리 유대종 (주간 1–3)</div>
+        </div>
+      </div>
+
+      <div class="tl-row kd" data-acad="kd">
+        <div class="tl-name"><div class="tl-name-main">이승모</div><div class="tl-name-sub">KANGDAE · 오프라인</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-intro" style="grid-column: 1/3;"  title="언매 특강 · 1–2월 오프라인">언매 특강</div>
+          <div class="tl-bar b-core"  style="grid-column: 1/5;"  title="천문학 · 시즌1 문학 (15주 · 5개년 3회독)">천문학</div>
+          <div class="tl-bar b-core"  style="grid-column: 1/5;"  title="밑빠진 독해 물붓기 시즌1 · 비문학 기출 심층">밑독물 시즌1</div>
+          <div class="tl-bar b-final" style="grid-column: 4/5;"  title="3월 교육청 직전 이승 모의고사">3월 이승 모의</div>
+          <div class="tl-bar b-core"  style="grid-column: 5/9;"  title="고민하는 포인트 · 시즌2 문학 심화">고민하는 포인트</div>
+          <div class="tl-bar b-core"  style="grid-column: 5/9;"  title="밑빠진 독해 물붓기 시즌2 · 비문학">밑독물 시즌2</div>
+          <div class="tl-bar b-core"  style="grid-column: 5/6;"  title="화법과 작문 · 4월 영상 무료 제공">화작 영상</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 5/12;" title="노력의 온도 · EBS 수특·수완 스키마 (격주)">노력의 온도</div>
+          <div class="tl-bar b-final" style="grid-column: 9/12;" title="결승전 · 파이널 문학 (8월–수능)">결승전</div>
+          <div class="tl-bar b-final" style="grid-column: 9/12;" title="밑빠진 독해 물붓기 시즌3 · 파이널 비문학">밑독물 시즌3</div>
+          <div class="tl-bar b-final" style="grid-column: 9/12;" title="이승/저승 모의고사 · 이승=숙제 저승=수업">이승/저승 모의</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="결승선 · 주간지 (E 필수 + C 선택 · 30주)">결승선 (주간 30주)</div>
+        </div>
+      </div>
+
+      <div class="tl-row sd" data-acad="sd">
+        <div class="tl-name"><div class="tl-name-main">강은양</div><div class="tl-name-sub">SIDAE</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-core"  style="grid-column: 1/4;"  title="K시즌 · 평가원 패턴 학습">K시즌</div>
+          <div class="tl-bar b-core"  style="grid-column: 4/8;"  title="E시즌 · 패턴 적용 + 실전 모의">E시즌</div>
+          <div class="tl-bar b-adv"   style="grid-column: 8/12;" title="Y시즌 · 패턴 체화">Y시즌</div>
+          <div class="tl-bar b-final" style="grid-column: 12/13;"title="KEY시즌 · 실전">KEY시즌</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 4/10;" title="ReBS 수특 · 수완 분석집">ReBS 분석집</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 10/11;"title="9월 ReBS 운문특강">운문특강</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="월간지 · 기출+N제+하프 모의">월간지</div>
+        </div>
+      </div>
+
+      <div class="tl-row sd" data-acad="sd">
+        <div class="tl-name"><div class="tl-name-main">방동진</div><div class="tl-name-sub">SIDAE</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-intro" style="grid-column: 1/2;"  title="더 국어 · 수능 입문">더 국어</div>
+          <div class="tl-bar b-core"  style="grid-column: 2/6;"  title="더 문학 · 더 독서">더 문학/독서</div>
+          <div class="tl-bar b-core"  style="grid-column: 5/8;"  title="더 언매 · 더 화작">더 언매/화작</div>
+          <div class="tl-bar b-ebs"   style="grid-column: 7/11;" title="궁극의 100작품">궁극의 100작품</div>
+          <div class="tl-bar b-adv"   style="grid-column: 9/12;" title="고득점 언매/화작 종결자">종결자</div>
+          <div class="tl-bar b-final" style="grid-column: 4/5;"  title="3평 실모">3평</div>
+          <div class="tl-bar b-final" style="grid-column: 7/8;"  title="6평 실모">6평</div>
+          <div class="tl-bar b-final" style="grid-column: 10/11;"title="9평 실모">9평</div>
+          <div class="tl-bar b-sub"   style="grid-column: 1/13;" title="매일 달리기 · 주간지">매일 달리기 (주간)</div>
+        </div>
+      </div>
+
+      <div class="tl-row sd" data-acad="sd">
+        <div class="tl-name"><div class="tl-name-main">심찬우</div><div class="tl-name-sub">SIDAE</div></div>
+        <div class="tl-track">
+          <div class="tl-bar b-core"  style="grid-column: 1/5;"  title="생각하며 글읽기 · 독서">생각하며 글읽기</div>
+          <div class="tl-bar b-core"  style="grid-column: 1/5;"  title="생각하며 감상하기 · 문학">생각하며 감상하기</div>
+          <div class="tl-bar b-core"  style="grid-column: 4/8;"  title="기출의 테마 1–3">기출의 테마</div>
+          <div class="tl-bar b-adv"   style="grid-column: 7/11;" title="세계의 찬우화 · 고난도">세계의 찬우화</div>
+          <div class="tl-bar b-final" style="grid-column: 10/13;"title="문학은 상위권의 변수다">문학은 상위권의 변수</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 03 CARDS -->
+  <div class="section-label">
+    <span class="idx">/ 03</span>
+    <h2>강사 상세 카드</h2>
+    <div class="rule"></div>
+    <span class="desc">12 / 12 · 클릭 시 매트릭스로 점프</span>
+  </div>
+
+  <div class="cards">
+
+    <div class="card mega" data-acad="mega" data-row="row-kmc">
+      <div class="card-head"><h3>강민철</h3><span class="acad-pill">MEGA · ONLINE</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">10+</span>
+      </div>
+      <p class="card-pos">
+        <b>기출 분석 중심의 정통파.</b> 옛(강기분)·최근(새기분) 이원화, FEED100으로 독서 고난도 커버.
+        파이널 라인업(강평업·무제·실모)이 두텁다.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>Core</div>
+        <ul><li>강기분 <small>옛 기출</small></li><li>새기분 <small>최근 기출</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-final"></span>Final stack</div>
+        <ul><li>강평업 · 무제 · 우리들의 기출 분석 · 실전 모의고사</li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-sub"></span>Monthly</div>
+        <ul><li>인(in)강민철 <small>1–8호 · 매일 2지문</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card mega" data-acad="mega" data-row="row-kdw">
+      <div class="card-head"><h3>김동욱</h3><span class="acad-pill">MEGA · ONLINE</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">13+</span>
+      </div>
+      <p class="card-pos">
+        <b>4분기 요일 시스템.</b> 일·취·월·장 네 클래스가 1년을 4등분.
+        현강 녹화 + 바탕 모고·본바탕·EBS 바탕 체계.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-intro"></span>Entry</div>
+        <ul><li>수국김 <small>12월</small></li><li>RESET 국어 <small>6평 이후</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>Core 4-quarter</div>
+        <ul><li>일 <small>개념</small> · 취 <small>실력</small> · 월 <small>심화</small> · 장 <small>파이널</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-adv"></span>Advanced</div>
+        <ul><li>CHECKMATE · BON 바탕 언매</li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card mega" data-acad="mega" data-row="row-jht">
+      <div class="card-head"><h3>전형태</h3><span class="acad-pill">MEGA · ONLINE</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">14+</span>
+      </div>
+      <p class="card-pos">
+        <b>단계별 브랜드 분화 전략.</b> 개념·기출은 올인원, EBS 연계는 나BS,
+        심화는 클리어, 파이널은 .zip. 각 시즌마다 별도 브랜드로 물량·점유율 확보.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>Core</div>
+        <ul><li>ALL NEW 문학 / 독서 올인원 · 고전 시가 · 언매 · 화작</li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-ebs"></span>EBS (나BS)</div>
+        <ul><li>나BS 수특 / 수완 · 문학 모의 10회 · 문법</li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-final"></span>Final</div>
+        <ul><li>나BS 파이널.zip · 최종점검 · 모의고사 · 문법 특강</li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card mega" data-acad="mega" data-row="row-rhj">
+      <div class="card-head"><h3>류현준</h3><span class="acad-pill">MEGA · 러셀</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">14+</span>
+      </div>
+      <p class="card-pos">
+        <b>러셀 오프라인 재종 기반 시즌제.</b> 웜업 → 확장 → 적용 → 피날레 4단계.
+        수준별 맞춤 과제·주간 한자어 테스트·단어장까지 관리형 커리큘럼.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>시즌 1 · 웜업</div>
+        <ul><li>생각의 전환 <small>독서</small> · 생각의 과정 <small>문학</small></li><li>언어 올인원 <small>문법 8주</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-ebs"></span>시즌 2–3 · 확장·적용</div>
+        <ul><li>EBS 수특 <small>3–5월</small> · EBS 수완 <small>6–8월</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-adv"></span>1등급 특강</div>
+        <ul><li>독서 배경지식 <small>법·경제·과학</small></li><li>문학 심화 개념어 <small>10개년 기출</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-sub"></span>Monthly / Weekly</div>
+        <ul><li>월간 시그니처 · 주간 류현준 <small>수준별</small></li><li>생각의 정리 <small>한자어·필수 문학 단어장</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card mega" data-acad="mega" data-row="row-kgm">
+      <div class="card-head"><h3>김강민</h3><span class="acad-pill">MEGA · 러셀</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">13+</span>
+      </div>
+      <p class="card-pos">
+        <b>강민정음 4시즌 + 투트랙 EBS.</b> 창제 → 해례본 → 언해본 → 결.
+        '두 가지 도구'로 독해 피지컬을 구축하고, EBS는 에센셜(지식)·해례본(피지컬) 이원화.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>시즌 1–2 · 창제·해례본</div>
+        <ul><li>창제 독서 <small>두 가지 도구</small> · 창제 문학 <small>감상법</small></li><li>해례본 <small>제재 확장 · 3–4월</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-ebs"></span>투트랙 EBS</div>
+        <ul><li>에센셜 <small>테로 ENC · 배경지식</small></li><li>해례본 EBS <small>자체 제작 · 실전 적용</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-adv"></span>시즌 3 · 언해본</div>
+        <ul><li>고난도 기출 <small>브레턴우즈·헤겔 등</small></li><li>언매 / 화작 특강 <small>방학 중</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-final"></span>시즌 4 · 결</div>
+        <ul><li>LEET 선별 · 사설 비기출 · 사관/교육청 기출</li><li>이감 모의 <small>5·8·10월 현장 응시</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card mega" data-acad="mega orb" data-row="row-mck">
+      <div class="card-head"><h3>미친국어</h3><span class="acad-pill">러셀 · 오르비</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">11+</span>
+      </div>
+      <p class="card-pos">
+        <b>메가 러셀 오프라인 + 오르비 인강 듀얼 플랫폼.</b>
+        5시즌 평가원 행동 체계 (평행론→훈련→평행강→파이널→행동 증명).
+        갈래별 '생각의 모양'으로 기복 없는 일관된 독해 체화.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>시즌 1–2 · 평행론·훈련</div>
+        <ul><li>평행론 <small>1–2월</small> · 행동 훈련 <small>3–5월</small></li><li>언매 5회 특강 <small>리얼 노베이스</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-adv"></span>시즌 3 · 평행강</div>
+        <ul><li>2개년 기출 집중 <small>최신 기조 체화</small></li><li>LEET · MEET · 사관 낯선 지문</li><li>미친국어 압축반 <small>6–8월 · 4주 완성</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-final"></span>시즌 4–5 · 파이널·행동 증명</div>
+        <ul><li>파이널 <small>6·9평 교집합</small></li><li>행동 증명 <small>이감 현장 전용</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-sub"></span>선택·상시</div>
+        <ul><li>안정적 10분컷 <small>화작 시그니처 리뉴얼</small></li><li>EBS 에센셜 <small>수특·수완 선별</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card kd" data-acad="kd" data-row="row-ksr">
+      <div class="card-head"><h3>김승리</h3><span class="acad-pill">KANGDAE · ONLINE</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">15+</span>
+      </div>
+      <p class="card-pos">
+        <b>코드네임 브랜딩.</b> KICE·Predator·VIC-FLIX로 영역을 구획.
+        독서 W.O.W는 주제별 54지문 항목화, 문학은 정서·태도 중심 표면 독해.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>Core</div>
+        <ul><li>All Of KICE [Origin] <small>작년 수능</small></li><li>Predator : 독서 / 문학 / W.O.W</li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-ebs"></span>EBS</div>
+        <ul><li>KBS in VIC-FLIX <small>수특·수완 문학</small></li><li>EB-Schema in VIC-FLIX <small>수특·수완 독서</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-sub"></span>Monthly</div>
+        <ul><li>매월승리 · 선택 언매 / 화작 시즌</li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card kd" data-acad="kd" data-row="row-ydj">
+      <div class="card-head"><h3>유대종</h3><span class="acad-pill">KANGDAE · ONLINE</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">13+</span>
+      </div>
+      <p class="card-pos">
+        <b>스키마 독해 + 하드코어 파이널.</b> 파노라마로 주제별 독서 스키마를 구축,
+        진또배기·유대종의 미로 고난도 변형·예측 지문을 집중 공략.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>Core</div>
+        <ul><li>인셉션 <small>평가원 기출</small></li><li>파노라마 <small>스키마</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-adv"></span>Hardcore</div>
+        <ul><li>진또배기 · 스팀팩 <small>자작</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-sub"></span>Weekly</div>
+        <ul><li>데일리 유대종 <small>시즌 1–3</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card kd" data-acad="kd" data-row="row-lsm">
+      <div class="card-head"><h3>이승모</h3><span class="acad-pill">KANGDAE · 오프라인</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">13+</span>
+      </div>
+      <p class="card-pos">
+        <b>"1년 안에 가능한 것들."</b> 6평 전엔 깊게 사고, 이후엔 양치기로 실전력.
+        필수(E) + 선택(C) 과제 체계 + 이승/저승 모의 이원화로 관리형 오프라인 운영.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>시즌 1 · 기출 분석 (15주)</div>
+        <ul><li>천문학 <small>문학</small> · 밑독물 <small>비문학</small></li><li>5개년 기출 3회독 <small>지문 100% 이해까지</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-ebs"></span>시즌 2 · 심화·EBS</div>
+        <ul><li>고민하는 포인트 <small>문학 심화</small></li><li>노력의 온도 <small>EBS 스키마·격주</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-final"></span>파이널 · 모의 이원화</div>
+        <ul><li>결승전 <small>파이널 문학</small></li><li>이승 <small>숙제·쉬움</small> / 저승 <small>수업·고난도</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-sub"></span>결승선 (주간)</div>
+        <ul><li>E 필수 <small>하프 모의 문학·독서</small></li><li>C 선택 <small>이C 눈독해 30주 · 시관리 40분</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card sd" data-acad="sd" data-row="row-key">
+      <div class="card-head"><h3>강은양</h3><span class="acad-pill">SIDAE · OFFLINE</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">12+</span>
+      </div>
+      <p class="card-pos">
+        <b>K·E·Y·KEY 시즌제.</b> 학습→적용→체화→실전 4단계 구조.
+        월간지에 기출·EBS N제·하프 모의가 통합된 올인원 포맷.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>Seasonal</div>
+        <ul><li>K시즌 <small>12–2월</small> · E시즌 <small>3–6월</small></li><li>Y시즌 <small>7–10월</small> · KEY시즌 <small>11월</small></li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-ebs"></span>EBS (ReBS)</div>
+        <ul><li>수능특강 / 수능완성 분석집 · 9월 운문특강</li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-sub"></span>Monthly</div>
+        <ul><li>월간지 <small>기출 + N제 + 하프 모의 통합</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card sd" data-acad="sd" data-row="row-bdj">
+      <div class="card-head"><h3>방동진</h3><span class="acad-pill">SIDAE · OFFLINE</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+          <span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">8+</span>
+      </div>
+      <p class="card-pos">
+        <b>"더" 시리즈 + 시대 외부 콘텐츠 연계.</b> 개념서 라인업은 단정하게,
+        서바이벌·엑셀러레이터 등 시대 자체 물량을 활용해 밀도 확보.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>"더" series</div>
+        <ul><li>더 국어 · 더 문학 · 더 독서 · 더 언매 · 더 화작</li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-adv"></span>Cross-link</div>
+        <ul><li>고득점 종결자 · 서바이벌 모의고사</li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-sub"></span>Daily</div>
+        <ul><li>매일 달리기 <small>매일 1지문 + 주 1세트</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+    <div class="card sd" data-acad="sd" data-row="row-scw">
+      <div class="card-head"><h3>심찬우</h3><span class="acad-pill">SIDAE · OFFLINE</span></div>
+      <div class="density">
+        <span class="density-label">Volume</span>
+        <div class="density-bar">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+        </div>
+        <span class="density-count">5+</span>
+      </div>
+      <p class="card-pos">
+        <b>생각 중심 감상론.</b> 얇은 커리큘럼, 두꺼운 사유.
+        세계의 찬우화 · 상위권의 변수로 고난도 변별 지점만 타격.
+      </p>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-core"></span>Thinking</div>
+        <ul><li>생각하며 글읽기 <small>독서</small></li><li>생각하며 감상하기 <small>문학</small></li><li>기출의 테마 1–3</li></ul>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label"><span class="pdot p-adv"></span>Top-tier</div>
+        <ul><li>세계의 찬우화 <small>고난도</small></li><li>문학은 상위권의 변수다 <small>최고난도</small></li></ul>
+      </div>
+      <span class="card-hint">→ matrix</span>
+    </div>
+
+  </div>
+
+  <!-- 04 HEATMAP -->
+  <div class="section-label">
+    <span class="idx">/ 04</span>
+    <h2>월별 밀도 히트맵</h2>
+    <div class="rule"></div>
+    <span class="desc">강사 × 월 · 타임라인 자동 집계</span>
+  </div>
+
+  <div class="heatmap">
+    <div class="hm-grid" id="hm-grid">
+      <div class="hm-head-label">INSTRUCTOR</div>
+      <div class="hm-head-months">
+        <div class="hm-month">12</div>
+        <div class="hm-month">1</div>
+        <div class="hm-month">2</div>
+        <div class="hm-month">3</div>
+        <div class="hm-month">4</div>
+        <div class="hm-month">5</div>
+        <div class="hm-month">6</div>
+        <div class="hm-month">7</div>
+        <div class="hm-month">8</div>
+        <div class="hm-month">9</div>
+        <div class="hm-month">10</div>
+        <div class="hm-month">11</div>
+      </div>
+      <div class="hm-head-total">TOTAL</div>
+      <!-- rows injected by JS -->
+    </div>
+
+    <div class="hm-foot">
+      <div class="hm-foot-label">SUM · 월별 전체</div>
+      <div class="hm-foot-bar" id="hm-foot-bar"></div>
+      <div class="hm-foot-total" id="hm-foot-total">— <small>개월 합</small></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>// PROTO-NOTE</b><br>
+    v0.4 · 모바일 최적화 (560px / 960px 2단 breakpoint) · bar 터치 시 하단 시트 툴팁.<br>
+    캐시 방지 메타 추가 (GitHub Pages 배포 후 수정 즉시 반영).<br>
+    남은 후보 · (a) 영역 필터(독서/문학/언매/화작) · (b) 강사 상세 드로어 · (c) 콘텐츠 타입 표준화 태그.
+  </div>
+
+</div>
+
+<script>
+  // --- heatmap auto-generation from timeline data ---
+  (function() {
+    const tlRows = document.querySelectorAll('.tl-row[data-acad]');
+    const grid = document.getElementById('hm-grid');
+    const footBar = document.getElementById('hm-foot-bar');
+    const footTotal = document.getElementById('hm-foot-total');
+    if (!grid) return;
+
+    const instructors = [];
+    tlRows.forEach(row => {
+      const acad = row.dataset.acad;
+      const name = row.querySelector('.tl-name-main').textContent;
+      const sub = row.querySelector('.tl-name-sub').textContent;
+      const counts = Array(12).fill(0);
+      row.querySelectorAll('.tl-bar').forEach(bar => {
+        const col = bar.style.gridColumn;
+        if (!col) return;
+        const m = col.match(/(\d+)\s*\/\s*(\d+)/);
+        if (!m) return;
+        const s = parseInt(m[1]);
+        const e = parseInt(m[2]);
+        for (let i = s; i < e; i++) {
+          if (i >= 1 && i <= 12) counts[i - 1]++;
+        }
+      });
+      instructors.push({ acad, name, sub, counts });
+    });
+
+    let globalMax = 1;
+    instructors.forEach(i => i.counts.forEach(c => { if (c > globalMax) globalMax = c; }));
+    const peakThreshold = globalMax * 0.75;
+
+    instructors.forEach(ins => {
+      const nameEl = document.createElement('div');
+      nameEl.className = 'hm-name';
+      nameEl.innerHTML = ins.name + '<span class="hm-name-sub">' + ins.sub + '</span>';
+
+      const cells = document.createElement('div');
+      cells.className = 'hm-cells';
+      ins.counts.forEach(c => {
+        const cell = document.createElement('div');
+        cell.className = 'hm-cell';
+        cell.dataset.c = c;
+        if (c > 0) {
+          const o = Math.min(0.15 + (c / globalMax) * 0.7, 0.85);
+          cell.style.setProperty('--o', o.toFixed(2));
+          if (c >= peakThreshold) cell.classList.add('peak');
+        }
+        cell.innerHTML = '<span class="n">' + (c > 0 ? c : '·') + '</span>';
+        cell.title = c + '개 강좌 진행';
+        cells.appendChild(cell);
+      });
+
+      const total = ins.counts.reduce((a, b) => a + b, 0);
+      const totalEl = document.createElement('div');
+      totalEl.className = 'hm-total';
+      totalEl.innerHTML = total + ' <small>개월</small>';
+
+      // group wrapper for filter
+      const rowGroup = document.createElement('div');
+      rowGroup.className = 'hm-row ' + ins.acad;
+      rowGroup.dataset.acad = ins.acad;
+      rowGroup.appendChild(nameEl);
+      rowGroup.appendChild(cells);
+      rowGroup.appendChild(totalEl);
+      grid.appendChild(rowGroup);
+    });
+
+    // footer column sums
+    const colSums = Array(12).fill(0);
+    instructors.forEach(i => i.counts.forEach((c, idx) => colSums[idx] += c));
+    const maxSum = Math.max(...colSums) || 1;
+    colSums.forEach(s => {
+      const col = document.createElement('div');
+      col.className = 'hm-foot-col';
+      const h = (s / maxSum) * 100;
+      col.innerHTML = '<span class="num">' + s + '</span><div class="bar" style="height:' + h.toFixed(1) + '%"></div>';
+      footBar.appendChild(col);
+    });
+    const grandTotal = colSums.reduce((a, b) => a + b, 0);
+    footTotal.innerHTML = grandTotal + ' <small>합계</small>';
+  })();
+
+  // --- academy filter (all 4 views) ---
+  const btns = document.querySelectorAll('.filter-btn');
+  const rows = document.querySelectorAll('tr[data-acad]');
+  const tlRows = document.querySelectorAll('.tl-row[data-acad]');
+  const hmRows = document.querySelectorAll('.hm-row[data-acad]');
+  const cards = document.querySelectorAll('.card[data-acad]');
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const f = b.dataset.filter;
+    const match = el => f === 'all' || (el.dataset.acad || '').split(' ').includes(f);
+    rows.forEach(r => r.classList.toggle('hidden', !match(r)));
+    tlRows.forEach(r => r.classList.toggle('hidden', !match(r)));
+    hmRows.forEach(r => r.classList.toggle('hidden', !match(r)));
+    cards.forEach(c => c.classList.toggle('hidden', !match(c)));
+  }));
+
+  // --- card -> matrix jump & highlight ---
+  cards.forEach(c => c.addEventListener('click', () => {
+    const id = c.dataset.row;
+    if (!id) return;
+    const tr = document.getElementById(id);
+    if (!tr) return;
+    document.querySelectorAll('.matrix tr.highlight').forEach(r => r.classList.remove('highlight'));
+    tr.classList.add('highlight');
+    tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => tr.classList.remove('highlight'), 2400);
+  }));
+
+  // --- timeline bar custom tooltip ---
+  const COURSE_INFO = {
+    // 강민철
+    "강민철|강기분": { full:"강민철의 기출 분석", alias:"강기분 (옛 기출)", type:"개념·기출 강의", period:"12월 말–2월 초", desc:"평가원 옛 기출을 태도론·구조 분석으로 재해석. 강민철 커리의 출발점이자 수능 감각의 뼈대.", target:"전 수험생" },
+    "강민철|새기분": { full:"새로운 기출 분석", alias:"새기분 (최근 기출)", type:"개념·기출 강의", period:"12월 말–2월 중", desc:"최근 평가원 기출을 심화 분석. 강기분과 쌍으로 묶여 '분석 이원화' 체계 완성.", target:"전 수험생" },
+    "강민철|EBS 분석": { full:"강민철의 EBS 분석", alias:"EBS 분석", type:"EBS 연계 강의+N제", period:"3월 말 개강", desc:"수능특강·수능완성 연계 지문을 변형 N제로 재구성. 연계 체화를 강민철식으로.", target:"중상위권~상위권" },
+    "강민철|FEED100": { full:"FEED100", alias:"피드100", type:"고난도 N제·강의", period:"여름 이후", desc:"독서 고난도 100지문. 킬러 지문 대응을 위한 피드백 중심 훈련.", target:"상위권" },
+    "강민철|강평업": { full:"강민철 평가원 업데이트", alias:"강평업", type:"중간 점검 강의", period:"6·9평 직후", desc:"6월·9월 모의평가 분석 및 커리 재조정. 평가원 기조 변화 반영.", target:"전 수험생" },
+    "강민철|무제": { full:"무제", alias:"파이널 주간지", type:"주간지·모의", period:"8–11월", desc:"EBS 연계 지문 + 낯선 지문 혼합. 파이널 시즌 감각 유지용 주간 콘텐츠.", target:"전 수험생" },
+    "강민철|우리들의 기출": { full:"우리들의 기출 분석", alias:"우기분", type:"파이널 강의", period:"10–11월", desc:"6·9평과 기존 기출을 통합 재분석. 수능 직전 기출 총정리.", target:"전 수험생" },
+    "강민철|실모": { full:"강민철 실전 모의고사", alias:"강실모", type:"실전 모의", period:"10–11월", desc:"수능 직전 파이널 모의고사. 시간 압박·변별 훈련.", target:"전 수험생" },
+    "강민철|인강민철 (월간 1–8호)": { full:"인(in)강민철", alias:"월간지 1–8호", type:"월간지·데일리", period:"연중", desc:"매일 2지문. 강기분·새기분과 연계되는 지속적 훈련 루틴.", target:"전 수험생" },
+
+    // 김동욱
+    "김동욱|수국김": { full:"수능 국어 김동욱", alias:"수국김", type:"입문·기초 강의", period:"12월 초–말", desc:"김동욱 커리의 진입점. 국어 공부 방향 설정 + 기초 독해 프레임.", target:"노베이스~중위권" },
+    "김동욱|일 클래스": { full:"일 클래스", alias:"일·취·월·장 1분기", type:"개념완성 강의", period:"1–2월", desc:"4분기 요일 시스템의 첫 단계. 개념 체계화.", target:"전 수험생" },
+    "김동욱|반응": { full:"반응 / SWITCH ON", alias:"반응", type:"기출 반응 훈련", period:"2–3월", desc:"기출 상황에 대한 빠른 반응 훈련. 실전 사고 회로 형성.", target:"전 수험생" },
+    "김동욱|취 클래스": { full:"취 클래스", alias:"일·취·월·장 2분기", type:"실력완성 강의", period:"3–5월", desc:"본격 실전 훈련 단계. 기출 심화 + 독해 완성도.", target:"전 수험생" },
+    "김동욱|RESET": { full:"RESET 국어", alias:"리셋", type:"리셋 강의", period:"6평 이후", desc:"상반기 성과 부진 수험생 대상 리셋. 개념 재정비 + 방향 재설정.", target:"정체 구간 수험생" },
+    "김동욱|수특/수완 문학": { full:"수특 문학 / 수완 문학", alias:"EBS 문학", type:"EBS 연계 강의", period:"여름", desc:"EBS 문학 작품 연계 분석. 작품 해석·선지 처리.", target:"전 수험생" },
+    "김동욱|월 클래스": { full:"월 클래스", alias:"일·취·월·장 3분기", type:"심화훈련 강의", period:"7–9월", desc:"고난도 대응 심화 단계. 킬러 지문 접근법 집중.", target:"중상위권~상위권" },
+    "김동욱|BON 바탕": { full:"BON 바탕 언매", alias:"본바탕", type:"언매 심화 강의", period:"여름", desc:"문법 체계화 + 언매 선지 처리. 김동욱 언매의 핵심.", target:"언매 선택자" },
+    "김동욱|장 클래스": { full:"장 클래스", alias:"일·취·월·장 4분기", type:"파이널 강의", period:"10–11월", desc:"4분기 커리의 종착점. 수능 최종 점검.", target:"전 수험생" },
+    "김동욱|언매 파이널": { full:"언매 파이널 클래스", alias:"언매 파이널", type:"선택과목 파이널", period:"10–11월", desc:"언매 최종 점검. BON 바탕 이후 마무리 단계.", target:"언매 선택자" },
+
+    // 전형태
+    "전형태|올인원 베이직": { full:"올인원 베이직", alias:"올베", type:"입문 강의", period:"12–1월", desc:"전형태 커리의 기초 단계. 개념·용어 정립.", target:"노베이스~중하위권" },
+    "전형태|문개집": { full:"문학 개념.zip", alias:"문개집", type:"개념서·강의", period:"겨울", desc:"문학 개념어와 필수 작품 압축 정리. 문학 기초의 결정판.", target:"전 수험생" },
+    "전형태|올인원 시리즈": { full:"ALL NEW 올인원", alias:"올인원", type:"개념·기출 통합 강의", period:"봄", desc:"문학·독서·고전시가·언매·화작 올인원 시리즈. 개념+기출 통합 처리.", target:"전 수험생" },
+    "전형태|6평 특강": { full:"6평 집중 분석", alias:"6평 특강", type:"중간 점검 강의", period:"6월 직후", desc:"6월 모의평가 해설 및 출제 경향 분석.", target:"전 수험생" },
+    "전형태|나BS 수특/수완": { full:"나BS 수특 · 수완", alias:"나BS EBS", type:"EBS 연계 강의", period:"여름", desc:"전형태표 EBS 연계. '나BS' 브랜드의 핵심 라인.", target:"전 수험생" },
+    "전형태|EBS 문학 모의": { full:"EBS 연계 문학 모의고사 10회", alias:"EBS 문학 모의", type:"EBS 모의", period:"여름", desc:"연계 작품 10회 모의. 낯선 연계 작품 대응.", target:"전 수험생" },
+    "전형태|9평 특강": { full:"9평 집중 분석", alias:"9평 특강", type:"중간 점검 강의", period:"9월 직후", desc:"9월 모의평가 해설 및 수능 예상 기조 분석.", target:"전 수험생" },
+    "전형태|클리어": { full:"언어 클리어 · 국어 클리어", alias:"클리어", type:"심화 점검 강의", period:"10월", desc:"문법 압축 심화(언어) + 문학·독서 점검(국어). 파이널 직전 막종정리.", target:"중상위권~상위권" },
+    "전형태|파이널 스택": { full:"나BS 파이널.zip · 최종점검 · 모의고사 · 문법 특강", alias:"파이널 스택", type:"파이널 종합", period:"10–11월", desc:"파이널 라인업 전체. 나BS 파이널.zip + 최종점검 + 실모 + 언매 모의 12회.", target:"전 수험생" },
+
+    // 류현준
+    "류현준|생각의 전환": { full:"생각의 전환", alias:"시즌1 · 독서", type:"독서 개념 강의", period:"1–2월 (웜업)", desc:"고3 수준 독해 접근법 정립. 문장 연결, 구조 파악, 중요 단어 선별. 고2 때의 나쁜 습관을 털어내는 리셋 단계.", target:"전 수험생" },
+    "류현준|생각의 과정": { full:"생각의 과정", alias:"시즌1 · 문학", type:"문학 개념 강의", period:"1–2월 (웜업)", desc:"단순 암기에서 벗어나 시어·작품을 스스로 사고하는 과정과 감상법. 류현준식 문학 접근의 뼈대.", target:"전 수험생" },
+    "류현준|언어 올인원": { full:"언어 올인원", alias:"문법 8주 특강", type:"문법 특강", period:"1월부터 8주", desc:"문법 전 범위를 다룰 수 있는 유일한 시기. 기초부터 심화 개념까지 + 기출 적용.", target:"전 수험생" },
+    "류현준|시즌2 확장": { full:"생각의 확장 (시즌 2)", alias:"시즌2 · 확장", type:"EBS 연계 강의", period:"3–5월 상반기", desc:"배운 개념을 고난도 기출 지문에 적용하며 실력 확장. EBS 수능특강 문학 해설 + 필수 독서 지문 병행.", target:"전 수험생" },
+    "류현준|시즌3 적용": { full:"적용 연습 (시즌 3)", alias:"시즌3 · 적용", type:"EBS 연계 강의", period:"6–8월 여름방학", desc:"행동 강령을 바탕으로 고난도 지문 적용 집중 연습. EBS 수능완성 문학 작품 + 독서 지문.", target:"전 수험생" },
+    "류현준|1등급 특강": { full:"1등급 독서·문학 특강", alias:"1등급 특강", type:"배경지식·심화 특강", period:"연중 · 상반기 중심", desc:"법·경제·과학 등 필수 배경지식과 심화 문학 개념어를 10개년 기출과 함께 정리. 1등급 변별 지점 대비.", target:"중상위권~상위권" },
+    "류현준|5월 실모": { full:"5월 실전 모의 (이감·상상)", alias:"5월 실모", type:"실전 모의 (외부)", period:"5월", desc:"6월 모의평가 대비 현장 실전 모의고사. 이감·상상 등 외부 콘텐츠.", target:"전 수험생" },
+    "류현준|8월 실모": { full:"8월 실전 모의 (이감·상상)", alias:"8월 실모", type:"실전 모의 (외부)", period:"8월", desc:"9월 모의평가 대비 현장 실전 모의고사.", target:"전 수험생" },
+    "류현준|시즌4 피날레": { full:"피날레 (시즌 4)", alias:"시즌4 · 피날레", type:"파이널 종합", period:"9월~수능", desc:"EBS 연계 작품(수특·수완) + 독서 지문 총정리 + 이감·상상 최종 실전. 1년 커리 수렴 단계.", target:"전 수험생" },
+    "류현준|월간·주간 류현준": { full:"월간 시그니처 · 주간 류현준", alias:"월간지·주간지", type:"월간지·주간지", period:"연중", desc:"매월 교재형 월간 시그니처 + 매주 프린트형 주간 류현준. 수준별 맞춤 과제 + 매주 한자어·필수 문학 작품 테스트.", target:"전 수험생" },
+
+    // 김강민
+    "김강민|창제 독서": { full:"강민정음 창제 · 독서", alias:"시즌1 · 창제", type:"독서 개념 강의", period:"1–2월 윈터", desc:"'두 가지 도구'를 익혀 다양한 구조의 글에 적용. 단순 구조도해가 아닌 기본기로 글을 뚫어내는 연습.", target:"전 수험생" },
+    "김강민|창제 문학": { full:"강민정음 창제 · 문학", alias:"시즌1 · 창제", type:"문학 개념 강의", period:"1–2월 윈터", desc:"시와 소설을 올바르게 감상하는 법 + 객관적 선지 판단 기준 학습. 김강민 감상론의 출발점.", target:"전 수험생" },
+    "김강민|해례본": { full:"강민정음 해례본", alias:"시즌2 · 해례본", type:"제재 확장 강의", period:"3–4월", desc:"경제·법·과학·기술·철학 등 다양한 제재에 '두 가지 도구' 적용. 소재와 무관하게 통하는 실력으로 확장.", target:"전 수험생" },
+    "김강민|에센셜": { full:"에센셜 (Essential)", alias:"배경지식 트랙", type:"EBS 배경지식", period:"봄–여름", desc:"국어 연구소 '테로 ENC' 협업. 배경지식·고전시가 전문·소설 줄거리 요약. 지문 이해를 돕는 필수 정보.", target:"전 수험생" },
+    "김강민|해례본 EBS": { full:"EBS 해례본", alias:"피지컬 트랙", type:"EBS 자체 제작", period:"봄–여름", desc:"자체 연구소 제작. '두 가지 도구'를 EBS 작품에 직접 적용해 독해 피지컬 강화. 연계를 암기가 아닌 훈련 도구로.", target:"전 수험생" },
+    "김강민|언해본": { full:"강민정음 언해본", alias:"시즌3 · 언해본", type:"고난도 심화 강의", period:"6–7월", desc:"브레턴우즈·헤겔 등 평가원 고난도 기출 + 문학 작품. 감상의 틀을 체화될 때까지 반복 연습.", target:"중상위권~상위권" },
+    "김강민|언매·화작 특강": { full:"언매 / 화작 특강", alias:"선택과목 특강", type:"선택과목 특강", period:"방학 중", desc:"방학 중 진행되는 문법 특강 + 전 범위 강의 영상 제공. 현장 강의 외 별도 영상 콘텐츠.", target:"선택과목 수험생" },
+    "김강민|5월 이감": { full:"5월 이감 모의고사", alias:"5월 이감", type:"실전 모의 (이감)", period:"5월", desc:"10년째 해설 중인 이감 모의고사. 현장 응시 + 해설 강의. 6평 대비.", target:"전 수험생" },
+    "김강민|8월 이감": { full:"8월 이감 모의고사", alias:"8월 이감", type:"실전 모의 (이감)", period:"8월", desc:"여름방학 말 현장 응시 + 해설 강의. 9평 대비.", target:"전 수험생" },
+    "김강민|10월 이감": { full:"10월 이감 모의고사", alias:"10월 이감", type:"실전 모의 (이감)", period:"10월", desc:"수능 직전 현장 응시 + 해설 강의. 실전 감각 마무리.", target:"전 수험생" },
+    "김강민|결 파이널": { full:"강민정음 결", alias:"시즌4 · 결", type:"파이널 종합", period:"9월~수능", desc:"6·9평 기조 반영 최종 마무리. LEET 선별 문항 + 고난도 사설·비기출 + 사관학교·교육청 기출. EBS 작품 정리 + 최종 행동 강령.", target:"전 수험생" },
+    "김강민|워크북": { full:"워크북", alias:"숙제 워크북", type:"숙제·추가 영상", period:"연중", desc:"현장 강의 숙제용. 어려운 지문은 별도 추가 해설 영상 촬영 제공. '올인원' 모토의 학습 공백 방지.", target:"전 수험생" },
+
+    // 미친국어 (메가 러셀 + 오르비)
+    "미친국어|언매 5회 특강": { full:"언매 5회 특강", alias:"문법 노베이스", type:"선택과목 특강", period:"겨울", desc:"문법 기초가 부족한 학생들을 위한 리얼 노베이스 대상 5회 구성 특강.", target:"언매 노베이스" },
+    "미친국어|평행론": { full:"평가원 행동 이론 (평행론)", alias:"시즌1 · 평행론", type:"독해 이론 강의", period:"1–2월", desc:"수능 국어 독해의 시작과 끝. 갈래별 기출로 '생각의 모양'(접근법과 사고)을 약속하고 일관된 독해 정립. 2026 수능을 분해해 현재 트렌드 반영.", target:"전 수험생" },
+    "미친국어|행동 훈련": { full:"평가원 행동 훈련", alias:"시즌2 · 행동 훈련", type:"기출 적용 강의", period:"3–5월", desc:"평행론에서 배운 내용을 무난한 난이도부터 고난도까지 더 많은 기출에 적용. EBS 연계 병행으로 독해력 + 배경지식 동시 확보.", target:"전 수험생" },
+    "미친국어|EBS 에센셜": { full:"EBS 에센셜", alias:"에센셜", type:"EBS 연계 콘텐츠", period:"봄–여름", desc:"수특·수완 문학 작품 중 출제 가능성이 높은 것을 선별 제공. 효율적 연계 대비.", target:"전 수험생" },
+    "미친국어|평행강": { full:"평가원 행동 강화 (평행강)", alias:"시즌3 · 평행강", type:"최신 기출·낯선 지문 심화", period:"6–8월", desc:"최근 2개년 기출(6·9평·수능) 집중 분석으로 최신 기조 체화 + 리트/미트/사관학교 낯선 지문에 행동 강령 적용.", target:"중상위권~상위권" },
+    "미친국어|압축반": { full:"미친국어 압축반", alias:"4주 완성 특강", type:"단기 속성 특강", period:"6–8월 (4주)", desc:"1–5월 학습 공백이 있는 학생·반수생 대상. 갈래별 행동 강령과 '생각의 모양'을 4주에 압축. 평행강 진입 전 다리 역할.", target:"반수생 · 상반기 공백 학생" },
+    "미친국어|시즌4 파이널": { full:"미친국어 파이널", alias:"시즌4 · 파이널", type:"파이널 종합", period:"9–10월", desc:"당해 6·9평 교집합(기조)을 행동화 + 유사 과거 기출 연결로 최종 정리.", target:"전 수험생" },
+    "미친국어|행동 증명": { full:"평가원 행동 증명", alias:"시즌5 · 현장 전용", type:"현장 실전 증명", period:"9–11월", desc:"이감 모의로 1년간 배운 갈래별 행동을 실전에서 증명. 사설 해설 + 유사 기출 연결 + EBS 최종 정리. 현장 전용.", target:"현장 수강생" },
+    "미친국어|안정적 10분컷": { full:"안정적 10분컷 (화작)", alias:"화작 시그니처", type:"선택과목 정규 (리뉴얼)", period:"연중", desc:"미친국어 시그니처. 더 체계적·방대한 양으로 리뉴얼. 시간 단축 + 안정적 고득점. 노베이스에도 효율적인 선택지.", target:"화작 선택자 · 노베이스 포함" },
+
+    // 김승리
+    "김승리|Origin": { full:"All Of KICE [Origin]", alias:"오리진", type:"개념·기출 강의", period:"겨울", desc:"작년 수능 전면 분석. 김승리 커리의 출발점이자 평가원 기준선.", target:"전 수험생" },
+    "김승리|Predator 독서/문학": { full:"Predator : 독서 · 문학", alias:"프레데터", type:"기출 심화 강의", period:"봄", desc:"평가원 기출 심층 분석. 독서·문학 이원화 프레임.", target:"전 수험생" },
+    "김승리|W.O.W": { full:"Predator 독서 W.O.W", alias:"W.O.W", type:"주제별 독서 강의", period:"봄–여름", desc:"주제별 54지문 항목화. 배경지식·제재 중심 독해 훈련.", target:"전 수험생" },
+    "김승리|KBS VIC-FLIX": { full:"KBS in VIC-FLIX", alias:"KBS", type:"EBS 연계 강의", period:"여름", desc:"수특·수완 문학 분석. VIC-FLIX 시리즈의 문학 파트.", target:"전 수험생" },
+    "김승리|EB-Schema": { full:"EB-Schema in VIC-FLIX", alias:"EB-Schema", type:"EBS 연계 강의", period:"여름", desc:"수특·수완 독서 분석. VIC-FLIX 시리즈의 독서 파트.", target:"전 수험생" },
+    "김승리|결격사유": { full:"결격사유", alias:"결사", type:"독서 N제 (미런칭)", period:"심화 구간", desc:"독서 고난도 N제. 현 시점 미런칭 상태.", target:"상위권" },
+    "김승리|Test 1s rhythM": { full:"Test 1s rhythM", alias:"테리", type:"하프 모의·파이널", period:"10–11월", desc:"하프 모의 + 기타 기출 통합. 파이널 시즌 리듬 유지.", target:"전 수험생" },
+    "김승리|아수라": { full:"아수라일지라도", alias:"아수라", type:"파이널 압축 강의", period:"수능 직전", desc:"전 커리 압축 + 실전 행동강령. 수능 당일 대응 프레임.", target:"전 수험생" },
+    "김승리|매월승리 (월간)": { full:"매월승리", alias:"월간지", type:"월간지", period:"연중", desc:"매월 발행 월간 모의 + 해설. 김승리 커리의 상시 공급원.", target:"전 수험생" },
+
+    // 유대종
+    "유대종|치열하게 독하게": { full:"국어 치열하게 독하게", alias:"치독", type:"입문·기초 강의", period:"겨울", desc:"국어 공부법부터 시작하는 기초 입문. 유대종식 사고방식 소개.", target:"노베이스~중위권" },
+    "유대종|인셉션": { full:"인셉션", alias:"인셉션", type:"기출 강의", period:"봄", desc:"평가원 기출 전면 분석. 스키마 설계의 출발점.", target:"전 수험생" },
+    "유대종|파노라마": { full:"파노라마", alias:"파노라마", type:"주제별 독서 강의", period:"봄–여름", desc:"주제별 독서 스키마 구축. 배경지식 체계화로 독서 구조화.", target:"전 수험생" },
+    "유대종|EBS OF LINE": { full:"EBS OF LINE", alias:"EOL", type:"EBS 연계 강훈련", period:"여름", desc:"EBS 독서 강도 높은 훈련. 연계 체화 + 독해 속도.", target:"중상위권" },
+    "유대종|진또배기": { full:"진또배기", alias:"진또배기", type:"고난도 변형 N제·강의", period:"여름–가을", desc:"하드코어 고난도 기출 변형. 킬러 지문 대응 집중 훈련.", target:"상위권" },
+    "유대종|유대종의 미": { full:"유대종의 미", alias:"대종미", type:"파이널 예측 강의", period:"10–11월", desc:"고난도 수능 예측 지문 중심 파이널. 막판 고점 돌파.", target:"상위권" },
+    "유대종|데일리 유대종 (주간 1–3)": { full:"데일리 유대종", alias:"데유 시즌 1–3", type:"주간지·데일리", period:"연중", desc:"시즌 1–3으로 연중 이어지는 주간 훈련 루틴. 매일 1지문 분량.", target:"전 수험생" },
+
+    // 이승모
+    "이승모|언매 특강": { full:"언어와 매체 특강", alias:"언매 특강", type:"선택과목 특강", period:"1–2월 (오프라인)", desc:"언매 선택자 대상 오프라인 특강. 현장 강의 영상은 3월부터 온라인 무료 제공.", target:"언매 선택자" },
+    "이승모|천문학": { full:"천문학", alias:"시즌1 · 문학", type:"문학 기출 분석", period:"개강~3월 말 (15주)", desc:"시즌1 문학 주교재. 5개년 기출 3회독 — 실전 풀이 + 영역별 심층 분석. 정답 선지 근거와 사고 과정 명시화.", target:"전 수험생" },
+    "이승모|밑독물 시즌1": { full:"밑빠진 독해 물붓기 시즌 1", alias:"밑독물 · 비문학", type:"비문학 기출 심층", period:"개강~3월 말", desc:"시즌1 비문학 주교재. 문제보다 지문 자체에 집중. 하루 한 지문을 3시간 이상 '뚫어보며' 100% 이해까지.", target:"전 수험생" },
+    "이승모|3월 이승 모의": { full:"이승 모의고사 (3월)", alias:"3월 실전 대비", type:"자작 문학 모의", period:"3월 교육청 직전 주", desc:"시즌1의 첫 실전 훈련. 15주 기출 분석 직후 실전 감각 예비 점검.", target:"전 수험생" },
+    "이승모|고민하는 포인트": { full:"고민하는 포인트", alias:"시즌2 · 문학", type:"문학 심화 강의", period:"4월~8월 초", desc:"시즌2 문학 주교재. 시즌1 기초 위에 더 까다로운 지문·문항 해결 능력. 심화 역량 강화.", target:"전 수험생" },
+    "이승모|밑독물 시즌2": { full:"밑빠진 독해 물붓기 시즌 2", alias:"밑독물2 · 비문학", type:"비문학 심화", period:"4월~8월 초", desc:"시즌2 비문학 주교재. 심화 고난도 지문으로 확장.", target:"전 수험생" },
+    "이승모|화작 영상": { full:"화법과 작문", alias:"화작 영상", type:"선택과목 영상", period:"4월 무료 제공", desc:"별도 영상 제작되어 무료 제공. 화작 선택자용 보충 콘텐츠.", target:"화작 선택자" },
+    "이승모|노력의 온도": { full:"노력의 온도", alias:"EBS 스키마", type:"EBS 연계 · 격주", period:"4월–10월 (격주)", desc:"EBS 수특·수완 작품과 소재(스키마)를 별도 연계 공부 없이 자연스럽게 체득. 격주 제공·약한 영역만 선택 학습 가능.", target:"전 수험생" },
+    "이승모|결승전": { full:"결승전", alias:"파이널 · 문학", type:"파이널 문학", period:"8월~수능", desc:"파이널 문학 주교재. 1년간 쌓은 사고력을 실전 최상으로 수렴.", target:"전 수험생" },
+    "이승모|밑독물 시즌3": { full:"밑빠진 독해 물붓기 시즌 3", alias:"밑독물3 · 파이널", type:"파이널 비문학", period:"8월~수능", desc:"파이널 비문학 주교재. 시즌3까지 이어지는 비문학 로드맵의 마무리.", target:"전 수험생" },
+    "이승모|이승/저승 모의": { full:"이승 / 저승 모의고사", alias:"모의 이원화", type:"자작 모의 (이원화)", period:"8월~수능", desc:"이승(쉬움)=숙제용 자가 실전 감각 유지 / 저승(고난도)=현장 수업용 변별 훈련. 숙제-수업 이원 설계.", target:"전 수험생" },
+    "이승모|결승선 (주간 30주)": { full:"결승선 (주간지)", alias:"결승선 · E+C", type:"주간지 · 30주", period:"연중", desc:"필수 E(하프 모의 문학·독서 각 2회) + 선택 C(이C 눈독해·시관리 40분·노력의 온도·이승 모의). 주간 양치기 + 약점 훈련.", target:"전 수험생" },
+
+    // 강은양
+    "강은양|K시즌": { full:"K시즌", alias:"K (학습)", type:"시즌제 정규", period:"12–2월", desc:"K·E·Y·KEY 시즌제의 1단계. 평가원 패턴 학습.", target:"전 수험생" },
+    "강은양|E시즌": { full:"E시즌", alias:"E (적용)", type:"시즌제 정규", period:"3–6월", desc:"테마별 학습 + 실전 모의. 패턴 적용 단계.", target:"전 수험생" },
+    "강은양|Y시즌": { full:"Y시즌", alias:"Y (체화)", type:"시즌제 심화", period:"7–10월", desc:"평가원 패턴 체화 단계. 실전 감각 내면화.", target:"전 수험생" },
+    "강은양|KEY시즌": { full:"KEY시즌", alias:"KEY (실전)", type:"시즌제 파이널", period:"11월", desc:"수능 직전 실전 집중 + KEY 모의고사(이감·상상).", target:"전 수험생" },
+    "강은양|ReBS 분석집": { full:"ReBS 수능특강 · 수능완성 분석집", alias:"ReBS", type:"EBS 교재·강의", period:"봄–여름", desc:"강은양표 EBS 분석집. 작품별 치밀한 분석.", target:"전 수험생" },
+    "강은양|운문특강": { full:"9월 ReBS 운문특강", alias:"운문특강", type:"EBS 특강", period:"9월", desc:"EBS 수능완성 운문 작품 집중 특강.", target:"전 수험생" },
+    "강은양|월간지": { full:"월간지", alias:"월간지", type:"월간지", period:"연중", desc:"주요 기출 + EBS N제 + 하프 모의 통합형. 시대 월간 포맷의 대표.", target:"전 수험생" },
+
+    // 방동진
+    "방동진|더 국어": { full:"더 국어", alias:"더 국어", type:"수능 입문 강의", period:"12–1월", desc:"'더' 시리즈의 시작. 수능 국어 입문 프레임.", target:"노베이스~중위권" },
+    "방동진|더 문학/독서": { full:"더 문학 · 더 독서", alias:"더 문독", type:"개념 강의", period:"2–5월", desc:"영역별 개념서. 문학·독서 기초에서 실전까지.", target:"전 수험생" },
+    "방동진|더 언매/화작": { full:"더 언매 · 더 화작", alias:"더 언화", type:"선택과목 개념", period:"봄", desc:"언매·화작 선택과목 개념 정리.", target:"선택과목 수험생" },
+    "방동진|궁극의 100작품": { full:"궁극의 100작품", alias:"궁극100", type:"EBS 연계 강의", period:"여름", desc:"EBS 연계 100작품 집중. 문학 연계 장악용.", target:"전 수험생" },
+    "방동진|종결자": { full:"고득점 언매 · 화작 종결자", alias:"종결자", type:"선택과목 심화", period:"가을", desc:"선택과목 고득점 마무리. 만점 타겟.", target:"상위권" },
+    "방동진|3평": { full:"3평 실전 모의고사", alias:"3평", type:"실모 (외부)", period:"3월", desc:"3월 학력평가 실전. 이감·상상 등 외부 콘텐츠 활용.", target:"전 수험생" },
+    "방동진|6평": { full:"6평 실전 모의고사", alias:"6평", type:"실모 (외부)", period:"6월", desc:"6월 모의평가 실전.", target:"전 수험생" },
+    "방동진|9평": { full:"9평 실전 모의고사", alias:"9평", type:"실모 (외부)", period:"9월", desc:"9월 모의평가 실전.", target:"전 수험생" },
+    "방동진|매일 달리기 (주간)": { full:"매일 달리기", alias:"매달", type:"주간지·데일리", period:"연중", desc:"매일 독서·문학 1지문 + 주 1세트. 엑셀러레이터(개념 필기노트)와 연계.", target:"전 수험생" },
+
+    // 심찬우
+    "심찬우|생각하며 글읽기": { full:"생각하며 글읽기", alias:"생글", type:"독서 개념 강의", period:"봄", desc:"감상론 기반 독서법. 심찬우 커리의 근간.", target:"전 수험생" },
+    "심찬우|생각하며 감상하기": { full:"생각하며 감상하기", alias:"생감", type:"문학 개념 강의", period:"봄", desc:"작품 감상 중심 문학 접근. '생글'의 문학 버전.", target:"전 수험생" },
+    "심찬우|기출의 테마": { full:"기출의 테마 1–3", alias:"기테", type:"기출 심화 강의", period:"봄–여름", desc:"테마별 기출 분석 3권. 감상론 프레임으로 기출 재해석.", target:"전 수험생" },
+    "심찬우|세계의 찬우화": { full:"세계의 찬우화", alias:"세찬화", type:"고난도 심화 강의", period:"여름–가을", desc:"고난도 지문 심화. 최상위 변별 지점 집중.", target:"상위권" },
+    "심찬우|문학은 상위권의 변수": { full:"문학은 상위권의 변수다", alias:"문상변", type:"최고난도 파이널", period:"가을–11월", desc:"6·9평 바탕 + 최고난도 문학. 수능 문학 변별 완성.", target:"최상위권" }
+  };
+
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tl-tooltip';
+  document.body.appendChild(tooltip);
+
+  const isTouch = matchMedia('(hover: none)').matches;
+  let activeBar = null;
+
+  function renderTooltip(bar) {
+    const row = bar.closest('.tl-row');
+    if (!row) return;
+    const teacher = row.querySelector('.tl-name-main').textContent.trim();
+    const acad = row.dataset.acad;
+    const label = bar.textContent.trim();
+    const key = teacher + '|' + label;
+    const fallback = bar.dataset.fb || '';
+    const info = COURSE_INFO[key];
+    let html = '';
+    if (info) {
+      html =
+        '<div class="tt-head">' +
+          '<div class="tt-title">' + info.full + '</div>' +
+          '<span class="tt-acad">' + teacher + '</span>' +
+        '</div>' +
+        (info.alias ? '<div class="tt-alias">' + info.alias + '</div>' : '') +
+        '<div class="tt-meta">' +
+          '<span><b>TYPE</b><span class="v">' + info.type + '</span></span>' +
+          '<span><b>시기</b><span class="v">' + info.period + '</span></span>' +
+        '</div>' +
+        '<div class="tt-desc">' + info.desc + '</div>' +
+        (info.target ? '<div class="tt-target"><b>TARGET</b>' + info.target + '</div>' : '');
+    } else {
+      html =
+        '<div class="tt-head">' +
+          '<div class="tt-title">' + label + '</div>' +
+          '<span class="tt-acad">' + teacher + '</span>' +
+        '</div>' +
+        '<div class="tt-desc">' + (fallback || '정보 준비 중') + '</div>';
+    }
+    tooltip.innerHTML = html;
+    tooltip.className = 'tl-tooltip ' + acad + ' show';
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('show');
+    activeBar = null;
+  }
+
+  document.querySelectorAll('.tl-bar').forEach(bar => {
+    // stash fallback title and remove default
+    bar.dataset.fb = bar.getAttribute('title') || '';
+    bar.removeAttribute('title');
+
+    if (!isTouch) {
+      bar.addEventListener('mouseenter', () => {
+        renderTooltip(bar);
+        activeBar = bar;
+      });
+      bar.addEventListener('mousemove', e => {
+        const tw = tooltip.offsetWidth;
+        const th = tooltip.offsetHeight;
+        let x = e.clientX + 16;
+        let y = e.clientY + 16;
+        if (x + tw > window.innerWidth - 8) x = e.clientX - tw - 16;
+        if (y + th > window.innerHeight - 8) y = e.clientY - th - 16;
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
+      });
+      bar.addEventListener('mouseleave', hideTooltip);
+    }
+
+    // click works on both (touch + desktop tap)
+    bar.addEventListener('click', e => {
+      e.stopPropagation();
+      if (activeBar === bar && tooltip.classList.contains('show')) {
+        hideTooltip();
+      } else {
+        renderTooltip(bar);
+        activeBar = bar;
+      }
+    });
+  });
+
+  // outside tap/click closes tooltip on touch
+  document.addEventListener('click', e => {
+    if (!tooltip.contains(e.target) && !e.target.closest('.tl-bar')) {
+      hideTooltip();
+    }
+  });
+</script>
+
+</body>
+</html>
